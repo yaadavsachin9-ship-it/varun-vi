@@ -93,6 +93,7 @@ export default function DashboardPage() {
   );
 
   const selectedRisk = selectedVillage?.current_risk_score ?? 0;
+  const selectedZone = selectedVillage?.current_risk_level || (selectedRisk >= 70 ? 'red' : selectedRisk >= 40 ? 'yellow' : 'green');
   const selectedLeadTime = selectedVillage?.current_lead_time_hrs ?? 0;
   const latestAlert = alerts[0];
   const tti = useCountdown(selectedLeadTime, selectedVillage?.id);
@@ -148,7 +149,7 @@ export default function DashboardPage() {
   }[dispatch.status];
 
   return (
-    <div className="app-shell min-h-screen text-gray-100 px-3 pb-24 pt-16 md:px-5 md:pb-24 md:pt-5 font-sans">
+    <div className={`app-shell risk-zone-${selectedZone} min-h-screen text-gray-100 px-3 pb-24 pt-16 md:px-5 md:pb-24 md:pt-5 font-sans`}>
       <header className="fixed top-0 inset-x-0 z-[1100] bg-[#051424]/95 backdrop-blur-xl border-b border-[#273647] md:static md:mb-4 md:border md:rounded-lg">
         <div className="bg-[#010f1f] px-3 py-1.5 flex items-center justify-between gap-2 overflow-hidden">
           <div className="flex items-center gap-1.5 min-w-0">
@@ -170,8 +171,8 @@ export default function DashboardPage() {
                 Demo auth
               </span>
             )}
-            <span className="telemetry text-[9px] text-amber-300 uppercase tracking-wider hidden sm:inline">
-              NDRF-OPS / ZONE-04
+            <span className="telemetry zone-status-label text-[9px] uppercase tracking-wider hidden sm:inline">
+              NDRF-OPS / {selectedZone.toUpperCase()} ZONE
             </span>
           </div>
         </div>

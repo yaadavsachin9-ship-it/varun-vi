@@ -185,6 +185,25 @@
 
 /* Stitch tactical command-center layout */
 .app-shell { min-height: 100vh; box-sizing: border-box; }
+.app-shell.risk-zone-green { --zone-accent: #4ade80; --zone-soft: rgba(34, 197, 94, .12); --zone-border: rgba(74, 222, 128, .55); --zone-glow: rgba(34, 197, 94, .16); background: linear-gradient(135deg, rgba(6, 48, 38, .42), transparent 42%); }
+.app-shell.risk-zone-yellow { --zone-accent: #fbbf24; --zone-soft: rgba(245, 158, 11, .14); --zone-border: rgba(251, 191, 36, .62); --zone-glow: rgba(245, 158, 11, .18); background: linear-gradient(135deg, rgba(75, 51, 5, .48), transparent 42%); }
+.app-shell.risk-zone-red { --zone-accent: #fb7185; --zone-soft: rgba(225, 29, 72, .16); --zone-border: rgba(251, 113, 133, .72); --zone-glow: rgba(225, 29, 72, .24); background: linear-gradient(135deg, rgba(91, 18, 31, .54), transparent 44%); }
+.app-shell.risk-zone-red::before { content: ''; position: fixed; inset: 0; pointer-events: none; border: 2px solid rgba(251, 113, 133, .34); box-shadow: inset 0 0 42px rgba(225, 29, 72, .16); z-index: 1200; animation: zone-alert-pulse 2.4s ease-in-out infinite; }
+.app-shell.risk-zone-yellow .zone-status-label { color: #fbbf24; }
+.app-shell.risk-zone-red .zone-status-label { color: #fb7185; animation: zone-alert-pulse 1.8s ease-in-out infinite; }
+.app-shell.risk-zone-green .zone-status-label { color: #4ade80; }
+.app-shell.risk-zone-green .tactical-context > div:first-child,
+.app-shell.risk-zone-yellow .tactical-context > div:first-child,
+.app-shell.risk-zone-red .tactical-context > div:first-child { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
+.app-shell.risk-zone-green .tactical-section-heading,
+.app-shell.risk-zone-yellow .tactical-section-heading,
+.app-shell.risk-zone-red .tactical-section-heading { border-left: 3px solid var(--zone-accent); }
+.app-shell.risk-zone-green .tactical-impact-card,
+.app-shell.risk-zone-yellow .tactical-impact-card { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
+.app-shell.risk-zone-red .tactical-impact-card { border-color: var(--zone-border); background: linear-gradient(90deg, rgba(76, 10, 26, .92), rgba(13, 28, 45, .94)); box-shadow: 0 0 24px var(--zone-glow); }
+.app-shell.risk-zone-yellow .emergency-override { background: #d97706; }
+.app-shell.risk-zone-red .emergency-override { background: #dc2626; box-shadow: 0 0 16px rgba(239, 68, 68, .36); }
+@keyframes zone-alert-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
 /* Height is content-driven: the two child bars below already fix their own heights, and
    pinning the parent to 40px with overflow:hidden clipped the title bar in half. */
 .app-shell > header { height: auto; }
@@ -215,8 +234,11 @@
 }
 
 .tactical-sidebar {
-  background: rgba(1, 15, 31, 0.72);
-  border: 1px solid rgba(39, 54, 71, 0.9);
+  background: linear-gradient(150deg, rgba(18, 45, 66, .66), rgba(1, 15, 31, .78));
+  border: 1px solid rgba(148, 163, 184, .22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 16px 34px rgba(1, 15, 31, .22);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
   padding: 8px 6px;
   display: flex;
   flex-direction: column;
@@ -303,7 +325,7 @@
 
 .tactical-main { display: grid; gap: 6px; align-content: start; }
 .tactical-rail { display: grid; gap: 8px; align-content: start; }
-.tactical-section-heading { background: rgba(13, 28, 45, .9); border: 1px solid #273647; padding: 6px 8px; }
+.tactical-section-heading { background: rgba(14, 37, 57, .68); border: 1px solid rgba(148, 163, 184, .22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 6px 8px; }
 .tactical-section-heading > span:first-child { display: flex; align-items: center; gap: 6px; }
 .tactical-section-heading svg { width: 13px; height: 13px; color: #67e8f9; }
 .village-identity { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
@@ -332,7 +354,7 @@
 .telemetry-matrix span, .telemetry-matrix small { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
 .telemetry-matrix strong { display: inline-block; color: #f1f5f9; font: 700 19px 'JetBrains Mono', monospace; margin-top: 8px; }
 .telemetry-matrix small { color: #67e8f9; margin-top: 2px; }
-.tactical-impact-card { background: rgba(13, 28, 45, .94); border: 1px solid rgba(239, 68, 68, .65); padding: 10px; box-shadow: 0 0 18px rgba(239, 68, 68, .12); }
+.tactical-impact-card { background: linear-gradient(135deg, rgba(21, 48, 69, .72), rgba(7, 26, 44, .84)); border: 1px solid rgba(239, 68, 68, .65); padding: 10px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 0 18px rgba(239, 68, 68, .12); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .impact-labels { display: flex; gap: 6px; flex-wrap: wrap; }
 .tactical-chip.red { color: #ffb3ad; background: rgba(239, 68, 68, .18); }
 .tactical-chip.amber { color: #ffb95f; background: rgba(245, 158, 11, .16); }
@@ -351,7 +373,7 @@
 .impact-metrics > div:first-child::after { content: ''; position: absolute; height: 4px; left: 9px; right: 9px; bottom: 6px; background: #273647; }
 .impact-metrics > div:first-child::before { content: ''; position: absolute; height: 4px; width: var(--risk-width, 0%); left: 9px; bottom: 6px; background: #ff5451; z-index: 1; }
 .amber-text { color: #ffb95f !important; }
-.tactical-dispatcher { background: #0d1c2d; border: 1px solid #273647; padding: 8px; }
+.tactical-dispatcher { background: rgba(14, 37, 57, .68); border: 1px solid rgba(148, 163, 184, .22); padding: 8px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .tactical-dispatcher label { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; margin: 10px 0 5px; }
 .tactical-dispatcher input { display: block; width: 100%; margin-top: 5px; box-sizing: border-box; border: 1px solid #273647; background: #010f1f; color: #d4e4fa; padding: 9px; font: 9px 'JetBrains Mono', monospace; }
 .dispatch-preview { border: 1px solid #273647; background: #010f1f; padding: 9px; margin-top: 8px; }
