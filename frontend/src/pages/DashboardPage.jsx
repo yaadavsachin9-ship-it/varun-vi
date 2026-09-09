@@ -34,6 +34,7 @@ import StormControlPanel from '../components/StormControlPanel';
 import LeadTimeExplainerModal from '../components/LeadTimeExplainerModal';
 import HydrographChart from '../components/HydrographChart';
 import EvacuationRoutePanel from '../components/EvacuationRoutePanel';
+import VillageIdentityBadge from '../components/VillageIdentityBadge';
 import { useRiskData } from '../context/RiskDataContext';
 import { useAuth } from '../context/AuthContext';
 import { dispatchAlert, triggerStorm } from '../lib/api';
@@ -242,7 +243,7 @@ export default function DashboardPage() {
       <section className="tactical-context flex flex-col gap-2 mb-3">
         <div className="bg-[#1c2b3c] rounded-md p-2.5 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 min-w-0">
-            <Mountain className="w-5 h-5 text-[#ffb95f] shrink-0" />
+            <VillageIdentityBadge village={selectedVillage} />
             <div className="min-w-0">
               <span className="telemetry block text-[9px] text-[#ab8986] uppercase tracking-wider">
                 Monitoring Sector
@@ -347,7 +348,8 @@ export default function DashboardPage() {
         <main className="tactical-main">
           <div className="tactical-section-heading">
             <span>
-              <Radio /> Tactical Risk Map: {selectedVillage?.name || 'Upper Alaknanda Basin'}
+              <VillageIdentityBadge village={selectedVillage} compact />
+              Tactical Risk Map: {selectedVillage?.name || 'Upper Alaknanda Basin'}
             </span>
             {selectedVillage && (
               <button
