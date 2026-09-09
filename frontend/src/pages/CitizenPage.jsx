@@ -22,7 +22,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  Mountain, Search, ChevronRight, ArrowLeft, Phone, Footprints, ArrowUpRight,
+  Search, ChevronRight, ArrowLeft, Phone, Footprints, ArrowUpRight,
   TriangleAlert, CloudRain, Droplets, Waves, Clock, WifiOff, Radio,
   Download, MapPin, CheckCircle2, ShieldAlert, RefreshCw,
 } from 'lucide-react';
@@ -145,7 +145,7 @@ function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back 
           </Link>
         ) : (
           <div className="w-9 h-9 rounded-lg bg-[#122131] border border-[#273647] flex items-center justify-center shrink-0">
-            <Mountain className="w-5 h-5 text-[#ffb3ad]" />
+            <img src="/varun-vi-logo.png" alt="VARUN logo" className="w-full h-full rounded-lg object-contain p-1" />
           </div>
         )}
 

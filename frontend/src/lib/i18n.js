@@ -77,7 +77,7 @@ const STRINGS = {
     ],
   },
   hi: {
-    appName: 'ड्रेन-गार्ड',
+    appName: 'VARUN',
     tagline: 'फ्लैश फ्लड पूर्व चेतावनी',
     chooseVillage: 'अपना गाँव चुनें',
     searchPlaceholder: 'गाँव या जिला खोजें',
