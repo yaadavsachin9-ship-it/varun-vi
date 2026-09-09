@@ -4,7 +4,88 @@
 
 ---
 
-## ⚡ Quick Start Guide (Run Live in Under 2 Minutes)
+## Installation
+
+### Prerequisites
+
+Install Python 3.11 or newer, Node.js 20 or newer with npm, Git, and optionally Docker Desktop. Check the tools with:
+
+```powershell
+python --version
+node --version
+npm --version
+git --version
+```
+
+### 1. Clone the repository
+
+```powershell
+git clone https://github.com/yaadavsachin9-ship-it/varun-vi.git
+cd varun-vi
+```
+
+### 2. Create the Python environment
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+```
+
+macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+```
+
+### 3. Install backend and ML dependencies
+
+With the virtual environment active:
+
+```powershell
+python -m pip install fastapi "uvicorn[standard]" sqlalchemy aiosqlite pydantic pydantic-settings python-dotenv httpx pytest numpy pandas scikit-learn joblib shapely
+```
+
+The included model at `ml/susceptibility_model.joblib` means model training is optional.
+
+### 4. Configure environment files
+
+The default setup uses SQLite and simulated alerts, so no API keys are required for a local demo:
+
+```powershell
+Copy-Item .env.example .env
+Copy-Item frontend\.env.example frontend\.env.local
+```
+
+Keep `ALERT_SIMULATION_MODE=true` for local development. The frontend expects the backend at `http://localhost:8000`; change `VITE_API_BASE` in `frontend/.env.local` if needed. Never put a Supabase service-role key in a frontend environment file.
+
+### 5. Install frontend dependencies
+
+```powershell
+Set-Location frontend
+npm install
+Set-Location ..
+```
+
+### 6. Create and seed the local database
+
+The backend creates tables automatically, but the village seed script populates the dashboard data:
+
+```powershell
+python -m backend.migrate
+python data\seed_villages.py
+```
+
+This creates `data/flood_prediction.db`, which is generated local state and is ignored by Git.
+
+## Quick Start
+
+Run the application with three terminals. Activate `.venv` in each terminal.
 
 ### 1. Start Backend API & Realtime Gateway
 In your first terminal:
@@ -53,7 +134,66 @@ In your third terminal:
 
 ---
 
-## 📂 Repository Structure
+## Optional Docker Setup
+
+The default local setup uses SQLite and does not need Docker. To run PostgreSQL and Redis:
+
+```powershell
+docker compose up -d postgres redis
+docker compose ps
+```
+
+Change `.env` to use the container services:
+
+```dotenv
+DATABASE_URL=postgresql+asyncpg://sih_user:sih_password@localhost:5432/sih_flood_db
+REDIS_URL=redis://localhost:6379/0
+USE_REDIS=true
+```
+
+Install the optional Python drivers before starting the backend:
+
+```powershell
+python -m pip install asyncpg redis
+```
+
+Stop the services with `docker compose down`. Add `-v` only when you also want to delete the database volumes.
+
+## Frontend Checks
+
+With the virtual environment active, run the backend tests and frontend checks:
+
+```powershell
+python -m pytest backend/test_backend.py -v
+python -m pytest backend/test_e2e.py -v
+Set-Location frontend
+npm run lint
+npm run build
+```
+
+## Troubleshooting
+
+### PowerShell blocks virtual environment activation
+
+Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned` and activate `.venv` again. This applies only to the current terminal.
+
+### The dashboard shows no villages
+
+Stop the backend, run `python data\seed_villages.py`, and restart the backend. Confirm that `data/flood_prediction.db` exists.
+
+### The frontend cannot connect to the backend
+
+Confirm that the backend is running on port 8000 and that `frontend/.env.local` contains `VITE_API_BASE=http://localhost:8000`. Restart Vite after changing an environment file.
+
+### Port 8000 or 5173 is already in use
+
+Start the backend with another `--port` and update `VITE_API_BASE`, or start Vite with `npm run dev -- --port 5174`.
+
+### `python` is not recognized
+
+Install Python with **Add Python to PATH** enabled, or use the `py` launcher in place of `python`.
+
+## Repository Structure
 ```
 ├── backend/
 │   ├── main.py              # FastAPI application, REST endpoints & WebSockets
