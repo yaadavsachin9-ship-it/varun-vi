@@ -14,7 +14,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import {
-  Mountain,
   Lock,
   Mail,
   Loader2,
@@ -76,8 +75,8 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Brand */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-11 h-11 rounded bg-[#122131] border border-[#273647] flex items-center justify-center shrink-0">
-            <Mountain className="w-6 h-6 text-[#ffb3ad]" />
+          <div className="w-16 h-16 rounded bg-white border border-[#273647] flex items-center justify-center shrink-0 overflow-hidden">
+            <img src="/varun-vi-logo.png" alt="VARUN-VI logo" className="w-full h-full object-cover" />
           </div>
           <div className="min-w-0">
             <span className="telemetry block text-[9px] uppercase tracking-[0.2em] text-[#ab8986]">

@@ -13,20 +13,20 @@
   "categories": ["utilities", "weather", "government"],
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
+      "src": "/varun-vi-logo.png",
+      "sizes": "2048x2048",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
+      "src": "/varun-vi-logo.png",
+      "sizes": "2048x2048",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-maskable-512.png",
-      "sizes": "512x512",
+      "src": "/varun-vi-logo.png",
+      "sizes": "2048x2048",
       "type": "image/png",
       "purpose": "maskable"
     }
