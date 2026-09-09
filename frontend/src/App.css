@@ -409,7 +409,7 @@
 .tactical-rail .glass-panel.rounded-xl .recharts-wrapper { max-width: 100%; }
 .tactical-rail > .glass-panel.rounded-xl { padding: 12px; }
 .tactical-rail-secondary { display: none; }
-.tactical-storm-control { display: none; }
+.tactical-storm-control { display: block; min-width: 0; }
 .center-hydrograph { display: none; }
 .rail-hydrograph { display: block; }
 .hydrograph-card { background: #071a2c; border: 1px solid #273647; padding: 8px; }
@@ -478,7 +478,7 @@
 @media (max-width: 720px) {
   .app-shell { padding-top: 12px !important; }
   .app-shell > footer { display: flex; }
-  .app-shell > header { height: auto; position: static; }
+  .app-shell > header { height: auto; }
   .app-shell > header > div:first-child { display: flex; }
   .app-shell > header > div:last-child { height: auto; min-height: 38px; }
   .app-shell > header > div:last-child h1 { font-size: 12px; }

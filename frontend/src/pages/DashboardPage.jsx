@@ -149,8 +149,8 @@ export default function DashboardPage() {
   }[dispatch.status];
 
   return (
-    <div className={`app-shell risk-zone-${selectedZone} min-h-screen text-gray-100 px-3 pb-24 pt-16 md:px-5 md:pb-24 md:pt-5 font-sans`}>
-      <header className="fixed top-0 inset-x-0 z-[1100] bg-[#051424]/95 backdrop-blur-xl border-b border-[#273647] md:static md:mb-4 md:border md:rounded-lg">
+    <div className={`app-shell risk-zone-${selectedZone} min-h-screen text-gray-100 px-3 pb-24 pt-0 md:px-5 md:pb-24 font-sans`}>
+      <header className="sticky top-0 inset-x-0 z-[1100] bg-[#051424]/95 backdrop-blur-xl border-b border-[#273647] mb-3 md:mb-4 md:border md:rounded-lg">
         <div className="bg-[#010f1f] px-3 py-1.5 flex items-center justify-between gap-2 overflow-hidden">
           <div className="flex items-center gap-1.5 min-w-0">
             <span
