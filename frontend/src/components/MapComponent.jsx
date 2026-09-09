@@ -82,6 +82,7 @@ export default function MapComponent({
   // Center coordinate presets
   const regionCoords = {
     all: { center: [29.35, 82.20], zoom: 7 },
+    panindia: { center: [22.5, 79.0], zoom: 5 },
     india: { center: [30.55, 79.56], zoom: 11 },
     nepal: { center: [28.60, 83.20], zoom: 8 }
   };
@@ -145,6 +146,18 @@ export default function MapComponent({
           title="Focus on Chamoli & Alaknanda Valley, Uttarakhand"
         >
           <span>🇮🇳 Chamoli (India)</span>
+        </button>
+
+        <button
+          onClick={() => handleRegionSwitch('panindia')}
+          className={`px-2.5 py-1 rounded font-medium transition flex items-center gap-1 ${
+            activeRegion === 'panindia' && !selectedVillage
+              ? 'bg-disaster-accent text-white shadow'
+              : 'text-gray-300 hover:text-white hover:bg-disaster-card'
+          }`}
+          title="View the pan-India hazard monitoring network"
+        >
+          <span>🇮🇳 Pan-India Network</span>
         </button>
 
         <button

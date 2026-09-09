@@ -108,6 +108,8 @@ npm run dev
 ```
 Open `http://localhost:5173` in your browser.
 
+The dashboard map includes a **Pan-India Network** tab with representative monitoring stations across Uttarakhand, Himachal Pradesh, Maharashtra, Kerala, Meghalaya, Assam, and Sikkim. Select a station to see its river basin, terrain profile, live risk, and evacuation data.
+
 ---
 
 ### 3. (Optional) Run Live IoT Sensor Simulator
