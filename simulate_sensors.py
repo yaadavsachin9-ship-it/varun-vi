@@ -30,6 +30,8 @@ simulator_state = {
     "storm_start_time": None,
     "storm_target_villages": [1, 2, 5, 8], # Raini, Tapovan, Helang, Govindghat
     "storm_intensity": "extreme",
+    "target_zone": None,
+    "target_village_ids": [],
     "storm_ramp_duration_s": 30.0,
     "tick_count": 0
 }
@@ -49,9 +51,36 @@ def get_simulated_reading(village, is_storm=False, storm_progress=0.0):
     base_water_level = 0.75 + random.uniform(-0.05, 0.05)
     base_pore_pressure = base_soil * 0.2
     
-    if is_storm and v_id in simulator_state["storm_target_villages"]:
+    target_ids = simulator_state["target_village_ids"] or simulator_state["storm_target_villages"]
+    if is_storm and v_id in target_ids:
         # Scale with storm progress (0.0 to 1.0)
         p = min(1.0, max(0.0, storm_progress))
+
+        if simulator_state["target_zone"] == "green":
+            return {
+                "village_id": v_id,
+                "rainfall_mm": 0.2,
+                "rainfall_1h_mm": 1.5,
+                "rainfall_24h_mm": 10.0,
+                "soil_moisture_pct": 22.0,
+                "pore_water_pressure_kpa": 4.5,
+                "vibration_index": 0.03,
+                "water_level_stream_m": 0.8,
+                "source": "iot-sensor-stream (demo-zone-green)",
+            }
+
+        if simulator_state["target_zone"] == "yellow":
+            return {
+                "village_id": v_id,
+                "rainfall_mm": 20.5,
+                "rainfall_1h_mm": 20.5,
+                "rainfall_24h_mm": 42.0,
+                "soil_moisture_pct": 66.0,
+                "pore_water_pressure_kpa": 10.0,
+                "vibration_index": 0.10,
+                "water_level_stream_m": 1.2,
+                "source": "iot-sensor-stream (demo-zone-yellow)",
+            }
         
         # Exponential cloudburst ramp
         rain_rate = base_rain + (p ** 1.5) * random.uniform(75.0, 115.0)
@@ -90,11 +119,15 @@ def get_simulated_reading(village, is_storm=False, storm_progress=0.0):
             "source": "iot-sensor-stream (normal)"
         }
 
-async def run_simulation_loop(interval_sec=4.0, storm_mode=False, max_ticks=None):
-    if storm_mode:
+async def run_simulation_loop(interval_sec=4.0, storm_mode=False, max_ticks=None, village_id=None, zone=None):
+    simulator_state["target_zone"] = zone
+    simulator_state["target_village_ids"] = [village_id] if village_id is not None else []
+    scenario_mode = storm_mode or zone is not None
+    if scenario_mode:
         simulator_state["storm_active"] = True
         simulator_state["storm_start_time"] = time.time()
-        print(">>> STARTING IN STORM / CLOUDBURST SIMULATION MODE <<<")
+        target_label = village_id if village_id is not None else "default storm targets"
+        print(f">>> STARTING TARGETED {zone or 'red'}-ZONE SIMULATION FOR {target_label} <<<")
     else:
         print(">>> STARTING IN NORMAL CONTINUOUS IoT TELEMETRY MODE <<<")
 
@@ -165,9 +198,20 @@ async def run_simulation_loop(interval_sec=4.0, storm_mode=False, max_ticks=None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flash Flood Sensor Simulator")
-    parser.add_argument("--storm", action="store_true", help="Trigger storm / cloudburst scenario immediately")
+    parser.add_argument("--storm", action="store_true", help="Trigger red-zone cloudburst mode for the default target villages")
+    parser.add_argument("--village-id", type=int, help="Target one village ID for a demo zone")
+    parser.add_argument("--zone", choices=("green", "yellow", "red"), help="Target zone for --village-id")
     parser.add_argument("--interval", type=float, default=3.0, help="Tick interval in seconds")
     parser.add_argument("--ticks", type=int, default=None, help="Number of ticks to run (default: infinite)")
     args = parser.parse_args()
 
-    asyncio.run(run_simulation_loop(interval_sec=args.interval, storm_mode=args.storm, max_ticks=args.ticks))
+    if args.zone and args.village_id is None:
+        parser.error("--zone requires --village-id")
+
+    asyncio.run(run_simulation_loop(
+        interval_sec=args.interval,
+        storm_mode=args.storm,
+        max_ticks=args.ticks,
+        village_id=args.village_id,
+        zone=args.zone,
+    ))

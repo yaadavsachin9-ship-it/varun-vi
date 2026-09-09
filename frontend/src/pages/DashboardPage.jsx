@@ -493,7 +493,11 @@ export default function DashboardPage() {
           </div>
 
           <div className="tactical-storm-control">
-            <StormControlPanel onStormTriggered={reload} onResetTriggered={reload} />
+            <StormControlPanel
+              villages={villages}
+              onStormTriggered={reload}
+              onResetTriggered={reload}
+            />
           </div>
 
           {activeView === 'map' && (

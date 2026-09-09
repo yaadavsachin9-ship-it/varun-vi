@@ -566,8 +566,12 @@ async def run_event_backtest(event_id: str):
 # C6. POST /api/demo/storm — triggers storm mode simulation
 @app.post("/api/demo/storm")
 async def trigger_storm_scenario(req: StormTriggerRequest, db: AsyncSession = Depends(get_db)):
+    zone = (req.zone or "red").lower()
+    if zone not in {"green", "yellow", "red"}:
+        raise HTTPException(status_code=400, detail="zone must be green, yellow, or red")
+
     active_storm_state["is_active"] = True
-    active_storm_state["intensity"] = req.intensity or "extreme"
+    active_storm_state["intensity"] = req.intensity or zone
     active_storm_state["started_at"] = datetime.datetime.now(datetime.timezone.utc)
     if req.village_ids:
         active_storm_state["target_villages"] = req.village_ids
@@ -586,17 +590,42 @@ async def trigger_storm_scenario(req: StormTriggerRequest, db: AsyncSession = De
     
     injected_results = []
     for v in target_villages:
-        # High intensity cloudburst reading
+        # Use realistic sensor profiles so the normal prediction engine computes the
+        # requested demo zone instead of bypassing the model with a frontend-only color.
+        zone_profile = {
+            "green": {
+                "rainfall_mm": 0.2,
+                "rainfall_1h_mm": 1.5,
+                "rainfall_24h_mm": 10.0,
+                "soil_moisture_pct": 22.0,
+                "pore_water_pressure_kpa": 4.5,
+                "vibration_index": 0.03,
+                "water_level_stream_m": 0.8,
+            },
+            "yellow": {
+                "rainfall_mm": 20.5,
+                "rainfall_1h_mm": 20.5,
+                "rainfall_24h_mm": 42.0,
+                "soil_moisture_pct": 66.0,
+                "pore_water_pressure_kpa": 10.0,
+                "vibration_index": 0.10,
+                "water_level_stream_m": 1.2,
+            },
+            "red": {
+                "rainfall_mm": req.target_rainfall_rate_mm_hr or 95.0,
+                "rainfall_1h_mm": 75.0,
+                "rainfall_24h_mm": 140.0,
+                "soil_moisture_pct": req.target_soil_moisture_pct or 92.0,
+                "pore_water_pressure_kpa": 26.5,
+                "vibration_index": 0.62,
+                "water_level_stream_m": 3.8,
+            },
+        }[zone]
+
         reading_in = ReadingCreate(
             village_id=v.id,
-            rainfall_mm=req.target_rainfall_rate_mm_hr or 92.5,
-            rainfall_1h_mm=75.0,
-            rainfall_24h_mm=140.0,
-            soil_moisture_pct=req.target_soil_moisture_pct or 91.0,
-            pore_water_pressure_kpa=26.5,
-            vibration_index=0.62,
-            water_level_stream_m=3.8,
-            source="cloudburst-simulator-trigger"
+            **zone_profile,
+            source=f"demo-zone-simulator-{zone}"
         )
         res = await ingest_reading(reading_in, db)
         injected_results.append(res)
@@ -604,6 +633,7 @@ async def trigger_storm_scenario(req: StormTriggerRequest, db: AsyncSession = De
     return {
         "status": "storm_scenario_active",
         "intensity": active_storm_state["intensity"],
+        "zone": zone,
         "target_villages_count": len(target_villages),
         "escalated_villages": injected_results
     }

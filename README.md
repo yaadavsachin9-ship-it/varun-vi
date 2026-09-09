@@ -119,7 +119,21 @@ In your third terminal:
 # Or trigger extreme storm mode from CLI:
 .venv\Scripts\python simulate_sensors.py --storm
 ```
-*(You can also trigger storm mode directly via the interactive red button on the frontend dashboard!)*
+
+To target one village from the command line, note its ID in the dashboard or from `GET http://localhost:8000/api/villages`, then choose a zone:
+
+```powershell
+# Village 3 becomes yellow/watch
+python simulate_sensors.py --village-id 3 --zone yellow
+
+# Village 7 becomes red/evacuation risk
+python simulate_sensors.py --village-id 7 --zone red
+
+# Return one village to green/normal telemetry
+python simulate_sensors.py --village-id 3 --zone green
+```
+
+The dashboard has the same **Target village**, **Target zone**, and **Apply Zone** controls. Stop running processes with `Ctrl+C`.
 
 ---
 

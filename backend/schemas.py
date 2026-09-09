@@ -129,6 +129,7 @@ class AlertDispatchRequest(BaseModel):
 class StormTriggerRequest(BaseModel):
     village_ids: Optional[List[int]] = None
     intensity: Optional[str] = "extreme"
+    zone: Optional[str] = Field(default=None, description="Demo target zone: green, yellow, or red")
     ramp_duration_seconds: Optional[int] = 30
     target_rainfall_rate_mm_hr: Optional[float] = 95.0
     target_soil_moisture_pct: Optional[float] = 92.0
