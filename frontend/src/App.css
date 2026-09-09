@@ -208,12 +208,13 @@
    pinning the parent to 40px with overflow:hidden clipped the title bar in half. */
 .app-shell > header { height: auto; }
 .app-shell > header > div:first-child { height: 20px; box-sizing: border-box; padding-top: 3px; padding-bottom: 3px; }
-.app-shell > header > div:last-child { height: 40px; box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; }
+.app-shell > header > div:last-child { min-height: 40px; height: auto; box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; align-items: center; }
 .app-shell > header > div:last-child h1 { font-size: 17px; line-height: 20px; }
 .app-shell > header > div:last-child .w-9 { width: 27px; height: 27px; }
 .app-shell > header > div:last-child button { width: 27px; height: 27px; }
 .app-shell > header > div:last-child button svg { width: 13px; height: 13px; }
 .app-shell > header > div:last-child { flex-wrap: wrap; }
+.app-shell > header > div:last-child > div:first-child { flex: 1 1 220px; min-width: 0; }
 .app-shell > header > div:last-child > div:last-child { flex-wrap: wrap; justify-content: flex-end; }
 .app-shell > header > div:last-child > div:last-child > * { flex: 0 0 auto; }
 .app-shell > header > div:nth-child(2) { display: none; }
@@ -479,7 +480,6 @@
   .app-shell > footer { display: flex; }
   .app-shell > header { height: auto; position: static; }
   .app-shell > header > div:first-child { display: flex; }
-  .app-shell > header > div:last-child { height: 38px; }
   .app-shell > header > div:last-child { height: auto; min-height: 38px; }
   .app-shell > header > div:last-child h1 { font-size: 12px; }
   .app-shell > .tactical-context { display: flex; }
