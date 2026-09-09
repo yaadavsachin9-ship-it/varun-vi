@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Chivo', system-ui, sans-serif;
+  color-scheme: dark;
+  --ops-bg: #051424;
+  --ops-surface: #0d1c2d;
+  --ops-surface-raised: #122131;
+  --ops-surface-high: #1c2b3c;
+  --ops-border: #273647;
+  --ops-text: #d4e4fa;
+  --ops-muted: #8ea3ba;
+  --ops-red: #ff625d;
+  --ops-amber: #ffb95f;
+  --ops-green: #4edea3;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ops-bg);
+  background-image: linear-gradient(rgba(39, 54, 71, 0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(39, 54, 71, 0.14) 1px, transparent 1px);
+  background-size: 36px 36px;
+  color: var(--ops-text);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: 'Chivo', sans-serif;
+}
+
+.glass-panel {
+  background: rgba(13, 28, 45, 0.96);
+  border: 1px solid var(--ops-border);
+  box-shadow: 0 14px 32px rgba(1, 15, 31, 0.24);
+}
+
+.glass-panel-glow-red {
+  background: rgba(42, 21, 31, 0.96);
+  border: 1px solid rgba(255, 98, 93, 0.62);
+  box-shadow: 0 0 24px rgba(185, 26, 36, 0.18);
+}
+
+.telemetry {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Leaflet Map overrides for dark sleek UI */
+.leaflet-container {
+  background: #010f1f !important;
+  font-family: 'Chivo', sans-serif !important;
+  border-radius: 0.25rem;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #111827 !important;
+  color: #f3f4f6 !important;
+  border: 1px solid #374151 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
+}
+
+.leaflet-popup-tip {
+  background: #111827 !important;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}

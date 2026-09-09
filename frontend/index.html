@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>VARUN — Flash Flood Early Warning</title>
+    <meta
+      name="description"
+      content="Flash-flood early warning for Himalayan villages: current risk, lead time, what to do now and the nearest shelter. Hindi and English."
+    />
+
+    <!-- The whole UI is dark; declaring it stops the browser painting a white frame
+         around the app and flashing white before the first render. -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#04101d" />
+
+    <!-- PWA. The manifest points start_url at /citizen: whoever installs this on a phone
+         is a villager wanting their own village, not an operator wanting the console. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="VARUN" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 24px; font-family: system-ui, sans-serif; color: #d4e4fa; background: #04101d">
+        <p><strong>VARUN</strong></p>
+        <p>इस चेतावनी प्रणाली के लिए JavaScript ज़रूरी है। आपात स्थिति में कॉल करें: 1070 या 112।</p>
+        <p>This warning system needs JavaScript. In an emergency call 1070 or 112.</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

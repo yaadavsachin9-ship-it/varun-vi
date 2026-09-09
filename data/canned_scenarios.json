@@ -1,0 +1,36 @@
+{
+  "description": "Pre-recorded / Canned Scenarios for Fail-Safe Judging Demo Replay",
+  "generated_for": "SIH 2026 Problem ID: 26192",
+  "scenarios": [
+    {
+      "id": "scenario-1-normal-monsoon",
+      "name": "Fair Weather Baseline Monitoring",
+      "description": "Light showers across Chamoli Valley. Infiltration capacity remains high.",
+      "readings": [
+        { "village_id": 1, "rainfall_mm": 1.2, "soil_moisture_pct": 28.5, "vibration_index": 0.04, "risk_score": 18.2, "risk_level": "green", "lead_time_hrs": 14.5 },
+        { "village_id": 2, "rainfall_mm": 0.8, "soil_moisture_pct": 25.0, "vibration_index": 0.03, "risk_score": 15.0, "risk_level": "green", "lead_time_hrs": 16.0 },
+        { "village_id": 5, "rainfall_mm": 1.5, "soil_moisture_pct": 31.0, "vibration_index": 0.05, "risk_score": 22.4, "risk_level": "green", "lead_time_hrs": 12.0 }
+      ]
+    },
+    {
+      "id": "scenario-2-moderate-surge",
+      "name": "Heavy Continuous Downpour (Yellow Warning)",
+      "description": "Continuous 45mm/hr rain saturating upper soil mantle in Joshimath & Helang.",
+      "readings": [
+        { "village_id": 1, "rainfall_mm": 42.0, "soil_moisture_pct": 74.0, "vibration_index": 0.18, "risk_score": 58.5, "risk_level": "yellow", "lead_time_hrs": 4.2 },
+        { "village_id": 2, "rainfall_mm": 38.0, "soil_moisture_pct": 71.5, "vibration_index": 0.15, "risk_score": 52.0, "risk_level": "yellow", "lead_time_hrs": 5.0 },
+        { "village_id": 5, "rainfall_mm": 46.0, "soil_moisture_pct": 78.0, "vibration_index": 0.22, "risk_score": 64.0, "risk_level": "yellow", "lead_time_hrs": 3.4 }
+      ]
+    },
+    {
+      "id": "scenario-3-catastrophic-cloudburst",
+      "name": "Cloudburst & Rishiganga Debris Surge (Critical Red)",
+      "description": "Simulated 2021-scale cloudburst (95mm/hr) in Raini & Tapovan. Soil liquefaction imminent.",
+      "readings": [
+        { "village_id": 1, "rainfall_mm": 98.0, "soil_moisture_pct": 94.5, "vibration_index": 0.72, "risk_score": 96.8, "risk_level": "red", "lead_time_hrs": 0.6, "alert_fired": true },
+        { "village_id": 2, "rainfall_mm": 88.0, "soil_moisture_pct": 91.0, "vibration_index": 0.58, "risk_score": 89.2, "risk_level": "red", "lead_time_hrs": 1.1, "alert_fired": true },
+        { "village_id": 5, "rainfall_mm": 92.0, "soil_moisture_pct": 93.0, "vibration_index": 0.64, "risk_score": 93.5, "risk_level": "red", "lead_time_hrs": 0.8, "alert_fired": true }
+      ]
+    }
+  ]
+}

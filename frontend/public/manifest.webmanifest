@@ -1,0 +1,44 @@
+{
+  "name": "VARUN — Flash Flood Early Warning",
+  "short_name": "VARUN",
+  "description": "Flash-flood early warning for Himalayan villages: your village's current risk, how long you have, what to do now and which shelter to walk to. Hindi and English.",
+  "lang": "hi-IN",
+  "dir": "ltr",
+  "start_url": "/citizen",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#04101d",
+  "theme_color": "#04101d",
+  "categories": ["utilities", "weather", "government"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "मेरा गाँव / My village",
+      "url": "/citizen"
+    },
+    {
+      "name": "नियंत्रण कक्ष / Control room",
+      "url": "/dashboard"
+    }
+  ]
+}

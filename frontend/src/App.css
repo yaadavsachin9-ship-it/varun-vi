@@ -1,0 +1,464 @@
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+
+/* Stitch tactical command-center layout */
+.app-shell { min-height: 100vh; box-sizing: border-box; }
+/* Height is content-driven: the two child bars below already fix their own heights, and
+   pinning the parent to 40px with overflow:hidden clipped the title bar in half. */
+.app-shell > header { height: auto; }
+.app-shell > header > div:first-child { height: 20px; box-sizing: border-box; padding-top: 3px; padding-bottom: 3px; }
+.app-shell > header > div:last-child { height: 40px; box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; }
+.app-shell > header > div:last-child h1 { font-size: 17px; line-height: 20px; }
+.app-shell > header > div:last-child .w-9 { width: 27px; height: 27px; }
+.app-shell > header > div:last-child button { width: 27px; height: 27px; }
+.app-shell > header > div:last-child button svg { width: 13px; height: 13px; }
+.app-shell > header > div:last-child { flex-wrap: wrap; }
+.app-shell > header > div:last-child > div:last-child { flex-wrap: wrap; justify-content: flex-end; }
+.app-shell > header > div:last-child > div:last-child > * { flex: 0 0 auto; }
+.app-shell > header > div:nth-child(2) { display: none; }
+.app-shell > .tactical-context { display: none; }
+.app-shell > footer { display: none; }
+.tactical-console {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 280px;
+  gap: 8px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.tactical-sidebar,
+.tactical-main,
+.tactical-rail {
+  min-width: 0;
+}
+
+.tactical-sidebar {
+  background: rgba(1, 15, 31, 0.72);
+  border: 1px solid rgba(39, 54, 71, 0.9);
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 65px);
+}
+
+.tactical-sidebar-title,
+.tactical-section-heading {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  line-height: 1.35;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #d4e4fa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tactical-sidebar-title {
+  font-size: 11px;
+  font-family: 'Chivo', sans-serif;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.tactical-chip {
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 3px 5px;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.tactical-chip.cyan { color: #67e8f9; background: rgba(8, 145, 178, .12); }
+.tactical-region { color: #ffb95f; font-size: 8px; margin: 8px 0 14px; text-transform: uppercase; }
+
+.tactical-nav { display: grid; gap: 4px; }
+.tactical-nav button {
+  min-height: 38px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #9fb0c3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  font: 700 9px 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+.tactical-nav button:hover { background: #122131; color: #d4e4fa; }
+.tactical-nav button.active { background: #b91a3a; border-color: #ff5451; color: #fff; }
+.tactical-nav svg { width: 15px; height: 15px; color: #67e8f9; }
+.tactical-nav button.active svg { color: #fff; }
+.tactical-nav button span { margin-left: auto; color: #ffb3ad; }
+
+.priority-grid { display: grid; gap: 5px; margin-top: 8px; }
+.priority-item {
+  width: 100%;
+  border: 1px solid #273647;
+  border-left: 3px solid #4edea3;
+  background: #0d1c2d;
+  color: #d4e4fa;
+  padding: 7px 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  text-align: left;
+  cursor: pointer;
+}
+.priority-item.red { border-color: rgba(255, 84, 81, .7); border-left-color: #ff5451; }
+.priority-item.yellow { border-color: rgba(255, 185, 95, .7); border-left-color: #ffb95f; }
+.priority-item b, .priority-item strong { display: block; font: 700 11px 'Chivo', sans-serif; }
+.priority-item.red b, .priority-item.red strong { color: #ff7b76; }
+.priority-item.yellow b, .priority-item.yellow strong { color: #ffb95f; }
+.priority-item small { display: block; color: #94a3b8; font: 7px 'JetBrains Mono', monospace; letter-spacing: .04em; margin-top: 3px; }
+.priority-item strong { text-align: right; font: 700 18px 'JetBrains Mono', monospace; }
+.priority-item strong small { color: inherit; font-size: 7px; }
+.emergency-override { margin-top: auto; min-height: 42px; border: 0; background: #ef4444; color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; font: 800 10px 'Chivo', sans-serif; text-transform: uppercase; cursor: pointer; }
+.emergency-override svg { width: 15px; height: 15px; }
+
+.tactical-main { display: grid; gap: 6px; align-content: start; }
+.tactical-rail { display: grid; gap: 8px; align-content: start; }
+.tactical-section-heading { background: rgba(13, 28, 45, .9); border: 1px solid #273647; padding: 6px 8px; }
+.tactical-section-heading > span:first-child { display: flex; align-items: center; gap: 6px; }
+.tactical-section-heading svg { width: 13px; height: 13px; color: #67e8f9; }
+.risk-key { color: #94a3b8; font-size: 8px; white-space: nowrap; }
+.risk-key i, .live-dot { width: 6px; height: 6px; display: inline-block; border-radius: 50%; margin: 0 2px; }
+.risk-key .red { background: #ef4444; } .risk-key .yellow { background: #f59e0b; } .risk-key .cyan, .live-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; }
+.live-dot { margin-left: auto; }
+.telemetry-matrix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+.telemetry-matrix > div { background: #0d1c2d; border: 1px solid #273647; padding: 9px 8px; min-width: 0; }
+.telemetry-matrix span, .telemetry-matrix small { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
+.telemetry-matrix strong { display: inline-block; color: #f1f5f9; font: 700 19px 'JetBrains Mono', monospace; margin-top: 8px; }
+.telemetry-matrix small { color: #67e8f9; margin-top: 2px; }
+.tactical-impact-card { background: rgba(13, 28, 45, .94); border: 1px solid rgba(239, 68, 68, .65); padding: 10px; box-shadow: 0 0 18px rgba(239, 68, 68, .12); }
+.impact-labels { display: flex; gap: 6px; flex-wrap: wrap; }
+.tactical-chip.red { color: #ffb3ad; background: rgba(239, 68, 68, .18); }
+.tactical-chip.amber { color: #ffb95f; background: rgba(245, 158, 11, .16); }
+.impact-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 8px 0 12px; }
+.impact-title h2 { margin: 0; color: #f1f5f9; font: 700 18px 'Chivo', sans-serif; text-transform: uppercase; }
+.impact-title p { margin: 3px 0 0; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.impact-countdown { border: 1px solid #273647; background: #010f1f; padding: 7px 9px; text-align: right; min-width: 165px; }
+.impact-countdown span { display: block; color: #ffb3ad; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.impact-countdown strong { color: #ff625d; font: 800 27px 'JetBrains Mono', monospace; line-height: 1.1; }
+.impact-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.impact-metrics > div { position: relative; overflow: hidden; background: #081a2e; border: 1px solid #273647; padding: 9px; }
+.impact-metrics span, .impact-metrics em { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; font-style: normal; }
+.impact-metrics strong { display: block; color: #ff625d; font: 700 18px 'JetBrains Mono', monospace; margin-top: 8px; }
+.impact-metrics strong small { color: #94a3b8; font-size: 9px; }
+.impact-metrics em { color: #ffb95f; margin-top: 4px; font-size: 7px; }
+.impact-metrics > div:first-child::after { content: ''; position: absolute; height: 4px; left: 9px; right: 9px; bottom: 6px; background: #273647; }
+.impact-metrics > div:first-child::before { content: ''; position: absolute; height: 4px; width: var(--risk-width, 0%); left: 9px; bottom: 6px; background: #ff5451; z-index: 1; }
+.amber-text { color: #ffb95f !important; }
+.tactical-dispatcher { background: #0d1c2d; border: 1px solid #273647; padding: 8px; }
+.tactical-dispatcher label { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; margin: 10px 0 5px; }
+.tactical-dispatcher input { display: block; width: 100%; margin-top: 5px; box-sizing: border-box; border: 1px solid #273647; background: #010f1f; color: #d4e4fa; padding: 9px; font: 9px 'JetBrains Mono', monospace; }
+.dispatch-preview { border: 1px solid #273647; background: #010f1f; padding: 9px; margin-top: 8px; }
+.dispatch-preview > span { display: flex; justify-content: space-between; color: #ffb3ad; font: 8px 'JetBrains Mono', monospace; }
+.dispatch-preview > span b { color: #67e8f9; font-size: 7px; }
+.dispatch-preview p { color: #f1f5f9; font: 10px/1.45 'Chivo', sans-serif; margin: 10px 0 0; }
+.dispatch-preview .hindi { color: #ffb95f; }
+.dispatch-button { width: 100%; min-height: 40px; margin-top: 8px; border: 0; background: #ef1741; color: #fff; display: flex; align-items: center; justify-content: center; gap: 7px; font: 800 11px 'Chivo', sans-serif; text-transform: uppercase; cursor: pointer; }
+.dispatch-button:hover { background: #ff3658; }
+.methodology-card { width: 100%; border: 1px solid #273647; background: #0d1c2d; color: #d4e4fa; padding: 10px; display: flex; align-items: center; gap: 9px; text-align: left; cursor: pointer; }
+.methodology-card:hover { border-color: #67e8f9; }
+.methodology-card > svg { width: 16px; color: #ffb95f; flex: 0 0 auto; }
+.methodology-card span { flex: 1; }
+.methodology-card small, .methodology-card strong { display: block; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+.methodology-card small { color: #ab8986; font-size: 8px; }
+.methodology-card strong { color: #d4e4fa; font-size: 11px; margin-top: 4px; }
+.methodology-card > svg:last-child { color: #94a3b8; }
+.tactical-evacuation-card { background: #0d1c2d; border: 1px solid #ff5451; padding: 18px; display: flex; align-items: center; gap: 12px; }
+.tactical-evacuation-card > svg { color: #ff625d; width: 26px; height: 26px; }
+.tactical-evacuation-card strong { color: #ffb3ad; font: 700 16px 'Chivo', sans-serif; text-transform: uppercase; }
+.tactical-evacuation-card p { margin: 4px 0 0; color: #94a3b8; font: 11px/1.4 'Chivo', sans-serif; }
+.tactical-evacuation-card button { margin-left: auto; border: 0; background: #ef1741; color: #fff; padding: 10px 12px; display: flex; align-items: center; gap: 6px; font: 800 9px 'JetBrains Mono', monospace; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
+.tactical-main > .glass-panel, .tactical-main > div > .glass-panel { border-radius: 2px; }
+.tactical-main .leaflet-container { height: 480px !important; border-radius: 2px; }
+.tactical-main .relative.w-full.h-\[520px\] { height: 480px; }
+.tactical-main > .rounded-md, .tactical-rail > .rounded-xl, .tactical-rail > .glass-panel { border-radius: 2px; }
+.tactical-rail .glass-panel { min-height: 300px; }
+.tactical-rail .glass-panel.rounded-xl { height: auto; }
+.tactical-rail .glass-panel.rounded-xl > div:first-child h2 { font-size: 16px; }
+.tactical-rail .glass-panel.rounded-xl .grid-cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tactical-rail .glass-panel.rounded-xl .min-h-\[160px\] { min-height: 145px; }
+.tactical-rail .glass-panel.rounded-xl .recharts-wrapper { max-width: 100%; }
+.tactical-rail > .glass-panel.rounded-xl { padding: 12px; }
+.tactical-rail-secondary { display: none; }
+.tactical-storm-control { display: none; }
+.center-hydrograph { display: none; }
+.rail-hydrograph { display: block; }
+.hydrograph-card { background: #071a2c; border: 1px solid #273647; padding: 8px; }
+.hydrograph-heading, .hydrograph-axis { display: flex; justify-content: space-between; gap: 8px; color: #d4e4fa; font: 8px 'JetBrains Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
+.hydrograph-heading span:last-child { color: #67e8f9; }
+.hydrograph-heading b { display: inline-block; width: 12px; height: 2px; vertical-align: middle; margin: 0 3px; }
+.cyan-line { background: #22d3ee; } .amber-line { background: #f59e0b; }
+.hydrograph-card svg { display: block; width: 100%; height: 102px; margin-top: 5px; }
+.hydrograph-card line { stroke: #273647; stroke-width: 1; stroke-dasharray: 3 4; }
+.hydrograph-card .threshold-line { stroke: #ef4444; stroke-dasharray: 5 3; }
+.hydrograph-card path { fill: none; stroke-width: 2.3; }
+.hydro-cyan { stroke: #22d3ee; } .hydro-amber { stroke: #f59e0b; stroke-dasharray: 4 3; }
+.hydrograph-axis { color: #94a3b8; font-size: 7px; margin-top: -1px; }
+.hydrograph-axis strong { color: #67e8f9; }
+
+/* Live Recharts hydrograph (components/HydrographChart.jsx).
+   Deliberately its own class namespace: the .hydrograph-card rules above target every svg,
+   path and line inside them, which would have pinned a Recharts chart to 102px and restyled
+   its axes and grid. Those rules belong to the old hand-drawn bezier sparkline this replaced. */
+.hydrograph-live { background: #071a2c; border: 1px solid #273647; padding: 8px; }
+.hydrograph-live-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #d4e4fa;
+  font: 8px 'JetBrains Mono', monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.hydrograph-live-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+.hydrograph-live-legend b { display: inline-block; width: 11px; height: 2px; }
+.hydrograph-live-legend .lg-cyan { background: #22d3ee; }
+.hydrograph-live-legend .lg-amber { background: #f59e0b; }
+.hydrograph-live-legend .lg-rose { background: #f43f5e; }
+.hydrograph-live-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+  color: #94a3b8;
+  font: 7px 'JetBrains Mono', monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.hydrograph-live-foot strong { color: #67e8f9; }
+.hydrograph-live .recharts-wrapper { max-width: 100%; }
+
+@media (max-width: 1100px) {
+  .app-shell > header { height: auto; }
+  .app-shell > header > div:nth-child(2) { display: flex; }
+  .tactical-context { display: flex !important; }
+  .tactical-console { grid-template-columns: 170px minmax(0, 1fr); }
+  .tactical-rail-secondary { display: block; }
+  .tactical-storm-control { display: block; }
+  .tactical-rail { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tactical-rail .tactical-section-heading, .tactical-rail .telemetry-matrix { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  .app-shell { padding-top: 12px !important; }
+  .app-shell > footer { display: flex; }
+  .app-shell > header { height: auto; position: static; }
+  .app-shell > header > div:first-child { display: flex; }
+  .app-shell > header > div:last-child { height: 38px; }
+  .app-shell > header > div:last-child { height: auto; min-height: 38px; }
+  .app-shell > header > div:last-child h1 { font-size: 12px; }
+  .app-shell > .tactical-context { display: flex; }
+  .tactical-console { display: flex; flex-direction: column; }
+  .tactical-sidebar { min-height: 0; order: 3; }
+  .tactical-sidebar .tactical-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tactical-sidebar .priority-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tactical-main { order: 1; }
+  .tactical-rail { order: 2; display: grid; grid-template-columns: 1fr; }
+  .tactical-rail .tactical-section-heading, .tactical-rail .telemetry-matrix { grid-column: auto; }
+  .tactical-main .leaflet-container, .tactical-main .relative.w-full.h-\[520px\] { height: 360px !important; }
+  .tactical-storm-control { display: block; }
+  .center-hydrograph { display: block; }
+  .rail-hydrograph { display: none; }
+  .risk-key { display: none; }
+  .impact-title { align-items: flex-start; flex-direction: column; }
+  .impact-countdown { width: 100%; box-sizing: border-box; text-align: left; }
+  .impact-metrics { grid-template-columns: 1fr; }
+  .tactical-evacuation-card { align-items: flex-start; flex-wrap: wrap; }
+  .tactical-evacuation-card button { margin-left: 0; width: 100%; justify-content: center; }
+}
