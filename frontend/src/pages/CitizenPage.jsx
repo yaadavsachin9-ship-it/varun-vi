@@ -24,7 +24,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Search, ChevronRight, ArrowLeft, Phone, Footprints, ArrowUpRight,
   TriangleAlert, CloudRain, Droplets, Waves, Clock, WifiOff, Radio,
-  Download, MapPin, CheckCircle2, ShieldAlert, RefreshCw,
+  Download, MapPin, CheckCircle2, ShieldAlert, RefreshCw, LogIn,
 } from 'lucide-react';
 import { useRiskData } from '../context/RiskDataContext';
 import { getEvacuationPlan, getVillage } from '../lib/api';
@@ -169,6 +169,17 @@ function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back 
           </button>
         )}
 
+        <Link
+          to="/login"
+          className="citizen-header-login inline-flex h-9 items-center gap-1.5 rounded-lg border px-2.5 text-[10px] font-semibold shrink-0"
+        >
+          <LogIn className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">
+            {lang === 'hi' ? 'कंट्रोल रूम' : 'Control room'}
+          </span>
+          <span className="sm:hidden">{lang === 'hi' ? 'लॉगिन' : 'Login'}</span>
+        </Link>
+
         {/* Language is a single tap, always visible, never buried in a menu. */}
         <div className="flex rounded-lg border border-[#273647] overflow-hidden shrink-0">
           <button
@@ -226,6 +237,8 @@ let autoOpened = false;
 function VillagePicker({ lang, villages, loading, loadError, onPick }) {
   const s = t(lang);
   const [query, setQuery] = useState('');
+  const redCount = villages.filter((v) => v.current_risk_level === 'red').length;
+  const watchCount = villages.filter((v) => v.current_risk_level === 'yellow').length;
 
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -240,26 +253,50 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
   }, [villages, query]);
 
   return (
-    <div className="max-w-md mx-auto px-3 py-4">
-      <h2 className="text-lg font-bold text-white mb-1">{s.chooseVillage}</h2>
-      <p className="text-[11px] text-slate-500 mb-3 leading-relaxed">
+    <div className="citizen-picker max-w-md mx-auto px-3 py-4">
+      <div className="citizen-picker-hero">
+        <span className="citizen-picker-kicker">
+          {lang === 'hi' ? 'लाइव आपदा चेतावनी' : 'Live disaster warning'}
+        </span>
+        <h2 className="text-xl font-black text-white tracking-tight mb-1">{s.chooseVillage}</h2>
+        <p className="text-[11px] text-slate-400 mb-0 leading-relaxed">
         {lang === 'hi'
           ? 'एक बार चुनने के बाद यह ऐप हर बार सीधे आपके गाँव की स्थिति दिखाएगा।'
           : 'Once chosen, the app will open straight to your village every time.'}
-      </p>
+        </p>
+      </div>
 
-      <div className="relative mb-3">
+      <div className="citizen-picker-summary" aria-label={lang === 'hi' ? 'क्षेत्र स्थिति सारांश' : 'Area status summary'}>
+        <div>
+          <strong>{villages.length}</strong>
+          <span>{lang === 'hi' ? 'कुल गाँव' : 'Villages'}</span>
+        </div>
+        <div className="is-watch">
+          <strong>{watchCount}</strong>
+          <span>{lang === 'hi' ? 'निगरानी' : 'Watch'}</span>
+        </div>
+        <div className="is-critical">
+          <strong>{redCount}</strong>
+          <span>{lang === 'hi' ? 'खतरा' : 'Critical'}</span>
+        </div>
+      </div>
+
+      <label className="citizen-picker-search relative mb-3 block">
+        <span className="sr-only">{s.searchPlaceholder}</span>
         <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={s.searchPlaceholder}
-          className="w-full h-11 bg-[#071a2c] border border-[#273647] rounded-lg pl-9 pr-3 text-[14px] text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60"
+          aria-label={s.searchPlaceholder}
+          autoComplete="off"
+          spellCheck={false}
+          className="w-full h-12 bg-transparent border-0 rounded-lg pl-10 pr-3 text-[14px] text-white placeholder:text-slate-500 focus:outline-none"
         />
-      </div>
+      </label>
 
       {loading && villages.length === 0 && (
-        <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-4 text-center">
+        <div className="citizen-picker-state" aria-live="polite">
           <span className="text-[12px] text-slate-400">
             {lang === 'hi' ? 'गाँवों की सूची आ रही है…' : 'Loading villages…'}
           </span>
@@ -267,19 +304,19 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
       )}
 
       {loadError && villages.length === 0 && (
-        <div className="rounded-lg border border-rose-500/40 bg-rose-500/10 p-3 mb-3">
+        <div className="citizen-picker-error" role="alert">
           <span className="text-[12px] text-rose-200">{loadError}</span>
         </div>
       )}
 
-      <div className="flex flex-col gap-2">
+      <div className="citizen-village-list">
         {matches.map((v) => {
           const sk = skin(v.current_risk_level);
           return (
             <button
               key={v.id}
               onClick={() => onPick(v.id)}
-              className={`flex items-center gap-3 rounded-lg border p-3 text-left active:scale-[0.99] transition ${
+              className={`citizen-village-row flex items-center gap-3 rounded-lg border p-3 text-left active:scale-[0.99] transition ${
                 v.current_risk_level === 'red'
                   ? 'border-rose-500/50 bg-rose-500/10'
                   : 'border-[#273647] bg-[#071a2c]'
@@ -306,7 +343,7 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
           );
         })}
         {!loading && matches.length === 0 && villages.length > 0 && (
-          <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-4 text-center">
+          <div className="citizen-picker-state">
             <span className="text-[12px] text-slate-400">
               {lang === 'hi' ? 'कोई गाँव नहीं मिला।' : 'No village matched.'}
             </span>
@@ -314,13 +351,6 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
         )}
       </div>
 
-      {/* The operator console is not hidden, just clearly not for this audience. */}
-      <Link
-        to="/login"
-        className="block text-center text-[10px] text-slate-600 hover:text-slate-400 mt-6 py-2"
-      >
-        {lang === 'hi' ? 'नियंत्रण कक्ष लॉगिन' : 'Control-room login'}
-      </Link>
     </div>
   );
 }

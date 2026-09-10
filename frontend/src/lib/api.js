@@ -78,7 +78,13 @@ export const dispatchAlert = (payload, signal) =>
 
 // ---- Historical backtest --------------------------------------------------------------
 
-export const getBacktestEvents = (signal) => request('/backtest/events', { signal });
+export const getBacktestEvents = async (signal) => {
+  const payload = await request('/backtest/events', { signal });
+  // The API returns both the catalogue and precomputed headline results. The picker
+  // needs the catalogue shape; keep the summary available for callers that need it.
+  if (Array.isArray(payload)) return payload;
+  return payload?.catalogue || [];
+};
 
 export const getBacktest = (eventId, signal) => request(`/backtest/${eventId}`, { signal });
 

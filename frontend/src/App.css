@@ -197,7 +197,7 @@
 .app-shell.risk-zone-red .tactical-context > div:first-child { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
 .app-shell.risk-zone-green .tactical-section-heading,
 .app-shell.risk-zone-yellow .tactical-section-heading,
-.app-shell.risk-zone-red .tactical-section-heading { border-left: 3px solid var(--zone-accent); }
+.app-shell.risk-zone-red .tactical-section-heading { border-left: 0; box-shadow: inset 0 1px 0 var(--zone-accent), inset 0 -1px 0 rgba(255, 255, 255, .04); }
 .app-shell.risk-zone-green .tactical-impact-card,
 .app-shell.risk-zone-yellow .tactical-impact-card { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
 .app-shell.risk-zone-red .tactical-impact-card { border-color: var(--zone-border); background: linear-gradient(90deg, rgba(76, 10, 26, .92), rgba(13, 28, 45, .94)); box-shadow: 0 0 24px var(--zone-glow); }
@@ -303,7 +303,7 @@
 .priority-item {
   width: 100%;
   border: 1px solid #273647;
-  border-left: 3px solid #4edea3;
+  border-left: 1px solid #4edea3;
   background: #0d1c2d;
   color: #d4e4fa;
   padding: 7px 6px;
@@ -500,4 +500,164 @@
   .impact-metrics { grid-template-columns: 1fr; }
   .tactical-evacuation-card { align-items: flex-start; flex-wrap: wrap; }
   .tactical-evacuation-card button { margin-left: 0; width: 100%; justify-content: center; }
+}
+
+/* Control-room finish pass: calmer surfaces, clearer priority, and consistent controls. */
+.app-shell {
+  background-color: #07111f;
+  background-image: radial-gradient(circle at 50% -20%, rgba(98, 217, 239, .08), transparent 34%);
+}
+
+.app-shell > header {
+  border-color: rgba(98, 217, 239, .2);
+  box-shadow: 0 10px 30px rgba(1, 12, 25, .24);
+}
+
+.app-shell > header > div:first-child {
+  background: #061321;
+  border-bottom: 1px solid rgba(42, 64, 87, .7);
+}
+
+.app-shell > header > div:last-child {
+  background: rgba(13, 26, 43, .96);
+}
+
+.app-shell > header > div:last-child button,
+.app-shell > header > div:last-child a {
+  border: 1px solid #2a4057;
+  background: #13243a;
+  border-radius: 7px;
+}
+
+.app-shell > header > div:last-child button:hover,
+.app-shell > header > div:last-child a:hover {
+  border-color: #62d9ef;
+  background: #1a3047;
+}
+
+.tactical-console {
+  gap: 10px;
+}
+
+.tactical-sidebar,
+.tactical-section-heading,
+.tactical-dispatcher,
+.tactical-rail .glass-panel {
+  border-color: rgba(157, 176, 196, .24);
+  box-shadow: 0 12px 28px rgba(1, 12, 25, .2), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.tactical-sidebar {
+  background: #0b1a2b;
+  padding: 10px 8px;
+}
+
+.tactical-nav button {
+  min-height: 42px;
+  border-radius: 7px;
+  color: #a8b9ca;
+}
+
+.tactical-nav button:hover {
+  background: #173049;
+  color: #e4eef9;
+}
+
+.tactical-nav button.active {
+  background: linear-gradient(180deg, #b82349 0%, #921c3c 100%);
+  border-color: #ff7180;
+  box-shadow: 0 5px 12px rgba(185, 35, 73, .2), inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+.priority-item,
+.telemetry-matrix > div,
+.impact-metrics > div,
+.hydrograph-live,
+.hydrograph-card {
+  border-color: #2a4057;
+  background: #0d1d30;
+}
+
+.priority-item:hover,
+.methodology-card:hover,
+.tactical-evacuation-card:hover {
+  border-color: #62d9ef;
+  background: #122840;
+}
+
+.priority-item {
+  border-left-width: 1px;
+  border-radius: 6px;
+}
+
+.app-shell .tactical-section-heading {
+  border-left-width: 1px;
+}
+
+.tactical-main > .glass-panel,
+.tactical-main > div > .glass-panel,
+.tactical-rail > .glass-panel {
+  box-shadow: 0 14px 30px rgba(1, 12, 25, .22), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.tactical-impact-card {
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.impact-title h2 {
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+.impact-countdown {
+  border-radius: 7px;
+  border-color: rgba(255, 107, 107, .4);
+  background: #081524;
+}
+
+.dispatch-button,
+.emergency-override,
+.tactical-evacuation-card button {
+  border-radius: 7px;
+  box-shadow: 0 4px 0 rgba(70, 7, 24, .75), 0 10px 18px rgba(225, 29, 72, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+.dispatch-button:active,
+.emergency-override:active,
+.tactical-evacuation-card button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(70, 7, 24, .75), 0 5px 10px rgba(225, 29, 72, .14);
+}
+
+.tactical-sidebar button:focus-visible,
+.tactical-main button:focus-visible,
+.tactical-rail button:focus-visible {
+  outline: 2px solid #62d9ef;
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .tactical-console {
+    gap: 10px;
+  }
+
+  .tactical-sidebar {
+    padding: 8px;
+  }
+
+  .tactical-sidebar .tactical-nav button {
+    min-height: 44px;
+  }
+
+  .tactical-main .leaflet-container,
+  .tactical-main .relative.w-full.h-\[520px\] {
+    height: 340px !important;
+  }
 }

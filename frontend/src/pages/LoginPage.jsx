@@ -114,7 +114,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={submit} className="flex flex-col gap-3">
+          <form id="operator-login-form" onSubmit={submit} className="flex flex-col gap-3">
             <label className="block">
               <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-1">
                 {isDemo ? 'Operator identity' : 'Email'}
@@ -181,6 +181,7 @@ export default function LoginPage() {
                   ? 'Create account'
                   : 'Sign in'}
             </button>
+
           </form>
 
           {!isDemo && (
@@ -198,7 +199,7 @@ export default function LoginPage() {
         {/* Public citizen route -- deliberately reachable without an account. */}
         <Link
           to="/citizen"
-          className="mt-4 flex items-center justify-between gap-2 rounded-lg border border-[#273647] bg-[#071a2c] hover:border-cyan-500/50 p-3 transition group"
+          className="login-public-card mt-4 flex items-center justify-between gap-2 rounded-lg p-3 group"
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <Smartphone className="w-4 h-4 text-cyan-300 shrink-0" />
