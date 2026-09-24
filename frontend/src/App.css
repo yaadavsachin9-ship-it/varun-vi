@@ -183,29 +183,75 @@
   }
 }
 
-/* Stitch tactical command-center layout */
-.app-shell { min-height: 100vh; box-sizing: border-box; }
-.app-shell.risk-zone-green { --zone-accent: #4ade80; --zone-soft: rgba(34, 197, 94, .12); --zone-border: rgba(74, 222, 128, .55); --zone-glow: rgba(34, 197, 94, .16); background: linear-gradient(135deg, rgba(6, 48, 38, .42), transparent 42%); }
-.app-shell.risk-zone-yellow { --zone-accent: #fbbf24; --zone-soft: rgba(245, 158, 11, .14); --zone-border: rgba(251, 191, 36, .62); --zone-glow: rgba(245, 158, 11, .18); background: linear-gradient(135deg, rgba(75, 51, 5, .48), transparent 42%); }
-.app-shell.risk-zone-red { --zone-accent: #fb7185; --zone-soft: rgba(225, 29, 72, .16); --zone-border: rgba(251, 113, 133, .72); --zone-glow: rgba(225, 29, 72, .24); background: linear-gradient(135deg, rgba(91, 18, 31, .54), transparent 44%); }
-.app-shell.risk-zone-red::before { content: ''; position: fixed; inset: 0; pointer-events: none; border: 2px solid rgba(251, 113, 133, .34); box-shadow: inset 0 0 42px rgba(225, 29, 72, .16); z-index: 1200; animation: zone-alert-pulse 2.4s ease-in-out infinite; }
-.app-shell.risk-zone-yellow .zone-status-label { color: #fbbf24; }
-.app-shell.risk-zone-red .zone-status-label { color: #fb7185; animation: zone-alert-pulse 1.8s ease-in-out infinite; }
-.app-shell.risk-zone-green .zone-status-label { color: #4ade80; }
+/* Tactical command-center layout themed with strict color system */
+.app-shell {
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--bg-app, #061826);
+  color: var(--text-primary, #F8FAFC);
+}
+.app-shell::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rgb-rainbow, linear-gradient(90deg, #164E63, #06B6D4, #22D3EE, #06B6D4, #164E63));
+  background-size: 300% 100%;
+  animation: rgb-sweep 4s linear infinite;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.8), 0 0 20px rgba(34, 211, 238, 0.5);
+  pointer-events: none;
+}
+.app-shell.risk-zone-green {
+  --zone-accent: #10B981;
+  --zone-soft: rgba(16, 185, 129, 0.14);
+  --zone-border: rgba(16, 185, 129, 0.65);
+  --zone-glow: rgba(16, 185, 129, 0.24);
+  background: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.10), transparent 45%), linear-gradient(135deg, rgba(7, 31, 48, 0.7), transparent 45%);
+}
+.app-shell.risk-zone-yellow {
+  --zone-accent: #FBBF24;
+  --zone-soft: rgba(251, 191, 36, 0.14);
+  --zone-border: rgba(251, 191, 36, 0.75);
+  --zone-glow: rgba(251, 191, 36, 0.28);
+  background: radial-gradient(circle at 10% 20%, rgba(251, 191, 36, 0.10), transparent 45%), linear-gradient(135deg, rgba(16, 56, 74, 0.7), transparent 45%);
+}
+.app-shell.risk-zone-red {
+  --zone-accent: #EF4444;
+  --zone-soft: rgba(239, 68, 68, 0.16);
+  --zone-border: rgba(239, 68, 68, 0.85);
+  --zone-glow: rgba(239, 68, 68, 0.35);
+  background: radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.12), transparent 45%), linear-gradient(135deg, rgba(30, 10, 16, 0.75), transparent 45%);
+}
+.app-shell.risk-zone-red::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  border: 2px solid rgba(239, 68, 68, 0.45);
+  box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.22), 0 0 25px rgba(239, 68, 68, 0.3);
+  z-index: 1200;
+  animation: zone-alert-pulse 2.2s ease-in-out infinite;
+}
+.app-shell.risk-zone-yellow .zone-status-label { color: #FBBF24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+.app-shell.risk-zone-red .zone-status-label { color: #EF4444; text-shadow: 0 0 12px rgba(239, 68, 68, 0.6); animation: zone-alert-pulse 1.8s ease-in-out infinite; }
+.app-shell.risk-zone-green .zone-status-label { color: #10B981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
 .app-shell.risk-zone-green .tactical-context > div:first-child,
 .app-shell.risk-zone-yellow .tactical-context > div:first-child,
-.app-shell.risk-zone-red .tactical-context > div:first-child { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
+.app-shell.risk-zone-red .tactical-context > div:first-child { border-color: var(--zone-border); box-shadow: 0 0 20px var(--zone-glow); }
 .app-shell.risk-zone-green .tactical-section-heading,
 .app-shell.risk-zone-yellow .tactical-section-heading,
-.app-shell.risk-zone-red .tactical-section-heading { border-left: 0; box-shadow: inset 0 1px 0 var(--zone-accent), inset 0 -1px 0 rgba(255, 255, 255, .04); }
+.app-shell.risk-zone-red .tactical-section-heading { border-left: 0; box-shadow: inset 0 2px 0 var(--zone-accent), inset 0 -1px 0 rgba(22, 78, 99, 0.5); }
 .app-shell.risk-zone-green .tactical-impact-card,
-.app-shell.risk-zone-yellow .tactical-impact-card { border-color: var(--zone-border); box-shadow: 0 0 18px var(--zone-glow); }
-.app-shell.risk-zone-red .tactical-impact-card { border-color: var(--zone-border); background: linear-gradient(90deg, rgba(76, 10, 26, .92), rgba(13, 28, 45, .94)); box-shadow: 0 0 24px var(--zone-glow); }
-.app-shell.risk-zone-yellow .emergency-override { background: #d97706; }
-.app-shell.risk-zone-red .emergency-override { background: #dc2626; box-shadow: 0 0 16px rgba(239, 68, 68, .36); }
+.app-shell.risk-zone-yellow .tactical-impact-card { border-color: var(--zone-border); box-shadow: 0 0 20px var(--zone-glow); }
+.app-shell.risk-zone-red .tactical-impact-card { border-color: var(--zone-border); background: linear-gradient(90deg, rgba(30, 10, 16, 0.95), rgba(11, 38, 56, 0.98)); box-shadow: 0 0 28px var(--zone-glow); }
+.app-shell.risk-zone-yellow .emergency-override { background: #FBBF24; color: #061826; box-shadow: 0 0 16px rgba(251, 191, 36, 0.4); }
+.app-shell.risk-zone-red .emergency-override { background: #EF4444; color: #F8FAFC; box-shadow: 0 0 22px rgba(239, 68, 68, 0.55); }
 @keyframes zone-alert-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
-/* Height is content-driven: the two child bars below already fix their own heights, and
-   pinning the parent to 40px with overflow:hidden clipped the title bar in half. */
+
 .app-shell > header { height: auto; }
 .app-shell > header > div:first-child { height: 20px; box-sizing: border-box; padding-top: 3px; padding-bottom: 3px; }
 .app-shell > header > div:last-child { min-height: 40px; height: auto; box-sizing: border-box; padding-top: 4px; padding-bottom: 4px; align-items: center; }
@@ -223,7 +269,7 @@
 .tactical-console {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr) 280px;
-  gap: 8px;
+  gap: 10px;
   max-width: 1800px;
   margin: 0 auto;
 }
@@ -235,15 +281,16 @@
 }
 
 .tactical-sidebar {
-  background: linear-gradient(150deg, rgba(18, 45, 66, .66), rgba(1, 15, 31, .78));
-  border: 1px solid rgba(148, 163, 184, .22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 16px 34px rgba(1, 15, 31, .22);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  padding: 8px 6px;
+  background: #071F30;
+  border: 1px solid #164E63;
+  box-shadow: inset 0 1px 0 rgba(22, 78, 99, 0.4), 0 16px 34px rgba(0, 0, 0, 0.4), 0 0 20px rgba(6, 182, 212, 0.05);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 65px);
+  border-radius: 8px;
 }
 
 .tactical-sidebar-title,
@@ -253,7 +300,7 @@
   line-height: 1.35;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: #d4e4fa;
+  color: #F8FAFC;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -269,21 +316,22 @@
 
 .tactical-chip {
   border: 1px solid currentColor;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 3px 5px;
   font-size: 8px;
   white-space: nowrap;
 }
 
-.tactical-chip.cyan { color: #67e8f9; background: rgba(8, 145, 178, .12); }
-.tactical-region { color: #ffb95f; font-size: 8px; margin: 8px 0 14px; text-transform: uppercase; }
+.tactical-chip.cyan { color: #06B6D4; background: rgba(6, 182, 212, 0.12); border-color: rgba(6, 182, 212, 0.4); }
+.tactical-region { color: #FBBF24; font-size: 8px; margin: 8px 0 14px; text-transform: uppercase; }
 
 .tactical-nav { display: grid; gap: 4px; }
 .tactical-nav button {
-  min-height: 38px;
+  min-height: 40px;
   border: 1px solid transparent;
+  border-radius: 6px;
   background: transparent;
-  color: #9fb0c3;
+  color: #94A3B8;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -292,115 +340,225 @@
   text-transform: uppercase;
   text-align: left;
   cursor: pointer;
+  transition: all 160ms ease;
 }
-.tactical-nav button:hover { background: #122131; color: #d4e4fa; }
-.tactical-nav button.active { background: #b91a3a; border-color: #ff5451; color: #fff; }
-.tactical-nav svg { width: 15px; height: 15px; color: #67e8f9; }
-.tactical-nav button.active svg { color: #fff; }
-.tactical-nav button span { margin-left: auto; color: #ffb3ad; }
+.tactical-nav button:hover { background: rgba(6, 182, 212, 0.08); color: #F8FAFC; }
+.tactical-nav button.active {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: #06B6D4;
+  color: #F8FAFC;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+}
+.tactical-nav svg { width: 15px; height: 15px; color: #06B6D4; }
+.tactical-nav button.active svg { color: #22D3EE; }
+.tactical-nav button span { margin-left: auto; color: #94A3B8; }
+.tactical-nav button.active span { color: #06B6D4; }
 
 .priority-grid { display: grid; gap: 5px; margin-top: 8px; }
 .priority-item {
   width: 100%;
-  border: 1px solid #273647;
-  border-left: 1px solid #4edea3;
-  background: #0d1c2d;
-  color: #d4e4fa;
-  padding: 7px 6px;
+  border: 1px solid #164E63;
+  border-left: 3px solid #06B6D4;
+  border-radius: 6px;
+  background: #0B2638;
+  color: #F8FAFC;
+  padding: 7px 8px;
   display: flex;
   justify-content: space-between;
   gap: 5px;
   text-align: left;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
-.priority-item.red { border-color: rgba(255, 84, 81, .7); border-left-color: #ff5451; }
-.priority-item.yellow { border-color: rgba(255, 185, 95, .7); border-left-color: #ffb95f; }
+.priority-item:hover {
+  border-color: #06B6D4;
+  background: #10384A;
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.2);
+  transform: translateX(2px);
+}
+.priority-item.red {
+  border-color: rgba(239, 68, 68, 0.6);
+  border-left-color: #EF4444;
+  box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.15);
+}
+.priority-item.yellow {
+  border-color: rgba(251, 191, 36, 0.6);
+  border-left-color: #FBBF24;
+  box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.15);
+}
 .priority-item b, .priority-item strong { display: block; font: 700 11px 'Chivo', sans-serif; }
-.priority-item.red b, .priority-item.red strong { color: #ff7b76; }
-.priority-item.yellow b, .priority-item.yellow strong { color: #ffb95f; }
-.priority-item small { display: block; color: #94a3b8; font: 7px 'JetBrains Mono', monospace; letter-spacing: .04em; margin-top: 3px; }
+.priority-item.red b, .priority-item.red strong { color: #EF4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+.priority-item.yellow b, .priority-item.yellow strong { color: #FBBF24; text-shadow: 0 0 8px rgba(251, 191, 36, 0.4); }
+.priority-item small { display: block; color: #94A3B8; font: 7px 'JetBrains Mono', monospace; letter-spacing: .04em; margin-top: 3px; }
 .priority-item strong { text-align: right; font: 700 18px 'JetBrains Mono', monospace; }
 .priority-item strong small { color: inherit; font-size: 7px; }
-.emergency-override { margin-top: auto; min-height: 42px; border: 0; background: #ef4444; color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; font: 800 10px 'Chivo', sans-serif; text-transform: uppercase; cursor: pointer; }
+
+.emergency-override {
+  margin-top: auto;
+  min-height: 42px;
+  border: 1px solid #EF4444;
+  border-radius: 7px;
+  background: #EF4444;
+  color: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: 800 10px 'Chivo', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5), 0 10px 18px rgba(239, 68, 68, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+.emergency-override:hover {
+  background: #DC2626;
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.7);
+  transform: translateY(-1px);
+}
 .emergency-override svg { width: 15px; height: 15px; }
 
-.tactical-main { display: grid; gap: 6px; align-content: start; }
+.tactical-main { display: grid; gap: 8px; align-content: start; }
 .tactical-rail { display: grid; gap: 8px; align-content: start; }
-.tactical-section-heading { background: rgba(14, 37, 57, .68); border: 1px solid rgba(148, 163, 184, .22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 6px 8px; }
+.tactical-section-heading {
+  background: #0B2638;
+  border: 1px solid #164E63;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(22, 78, 99, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 8px 10px;
+}
 .tactical-section-heading > span:first-child { display: flex; align-items: center; gap: 6px; }
-.tactical-section-heading svg { width: 13px; height: 13px; color: #67e8f9; }
+.tactical-section-heading svg { width: 13px; height: 13px; color: #06B6D4; }
 .village-identity { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
-.village-identity-mark { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 8px; background: rgba(4, 16, 29, .75); box-shadow: inset 0 0 12px rgba(255, 255, 255, .05); }
-.village-identity-mark svg { width: 18px; height: 18px; }
+.village-identity-mark { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid #164E63; border-radius: 8px; background: #10384A; box-shadow: inset 0 0 12px rgba(6, 182, 212, 0.05); }
+.village-identity-mark svg { width: 18px; height: 18px; color: #06B6D4; }
 .village-identity-copy { display: grid; min-width: 0; gap: 2px; }
-.village-identity-copy strong { color: #f1f5f9; font: 700 11px 'Chivo', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.village-identity-copy small { color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.village-identity-copy strong { color: #F8FAFC; font: 700 11px 'Chivo', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.village-identity-copy small { color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .village-identity-compact .village-identity-mark { width: 23px; height: 23px; border-radius: 5px; }
 .village-identity-compact .village-identity-mark svg { width: 13px; height: 13px; }
-.village-identity.ice, .village-identity.snow { color: #93c5fd; }
-.village-identity.river, .village-identity.lake { color: #67e8f9; }
-.village-identity.ridge { color: #fbbf24; }
-.village-identity.forest { color: #86efac; }
-.village-identity.dry { color: #fdba74; }
-.village-identity.hot { color: #fda4af; }
-.village-identity.risk-red .village-identity-mark { border-color: #fb7185; }
-.village-identity.risk-yellow .village-identity-mark { border-color: #fbbf24; }
-.village-identity.risk-green .village-identity-mark { border-color: #4ade80; }
-.risk-key { color: #94a3b8; font-size: 8px; white-space: nowrap; }
+.village-identity.ice, .village-identity.snow { color: #F8FAFC; }
+.village-identity.river, .village-identity.lake { color: #06B6D4; }
+.village-identity.ridge { color: #FBBF24; }
+.village-identity.forest { color: #10B981; }
+.village-identity.dry { color: #FBBF24; }
+.village-identity.hot { color: #EF4444; }
+.village-identity.risk-red .village-identity-mark { border-color: #EF4444; }
+.village-identity.risk-yellow .village-identity-mark { border-color: #FBBF24; }
+.village-identity.risk-green .village-identity-mark { border-color: #10B981; }
+.risk-key { color: #94A3B8; font-size: 8px; white-space: nowrap; }
 .risk-key i, .live-dot { width: 6px; height: 6px; display: inline-block; border-radius: 50%; margin: 0 2px; }
-.risk-key .red { background: #ef4444; } .risk-key .yellow { background: #f59e0b; } .risk-key .cyan, .live-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; }
+.risk-key .red { background: #EF4444; } .risk-key .yellow { background: #FBBF24; } .risk-key .cyan, .live-dot { background: #06B6D4; box-shadow: 0 0 8px #06B6D4; }
 .live-dot { margin-left: auto; }
-.telemetry-matrix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
-.telemetry-matrix > div { background: #0d1c2d; border: 1px solid #273647; padding: 9px 8px; min-width: 0; }
-.telemetry-matrix span, .telemetry-matrix small { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
-.telemetry-matrix strong { display: inline-block; color: #f1f5f9; font: 700 19px 'JetBrains Mono', monospace; margin-top: 8px; }
-.telemetry-matrix small { color: #67e8f9; margin-top: 2px; }
-.tactical-impact-card { background: linear-gradient(135deg, rgba(21, 48, 69, .72), rgba(7, 26, 44, .84)); border: 1px solid rgba(239, 68, 68, .65); padding: 10px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 0 18px rgba(239, 68, 68, .12); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.telemetry-matrix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.telemetry-matrix > div { background: #0B2638; border: 1px solid #164E63; border-radius: 6px; padding: 9px 8px; min-width: 0; }
+.telemetry-matrix span, .telemetry-matrix small { display: block; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
+.telemetry-matrix strong { display: inline-block; color: #F8FAFC; font: 700 19px 'JetBrains Mono', monospace; margin-top: 8px; }
+.telemetry-matrix small { color: #06B6D4; margin-top: 2px; }
+.tactical-impact-card {
+  background: #0B2638;
+  border: 1px solid #164E63;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: inset 0 1px 0 rgba(22, 78, 99, 0.3), 0 14px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 .impact-labels { display: flex; gap: 6px; flex-wrap: wrap; }
-.tactical-chip.red { color: #ffb3ad; background: rgba(239, 68, 68, .18); }
-.tactical-chip.amber { color: #ffb95f; background: rgba(245, 158, 11, .16); }
+.tactical-chip.red { color: #EF4444; background: rgba(239, 68, 68, 0.14); border-color: rgba(239, 68, 68, 0.45); }
+.tactical-chip.amber { color: #FBBF24; background: rgba(251, 191, 36, 0.14); border-color: rgba(251, 191, 36, 0.45); }
 .impact-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 8px 0 12px; }
-.impact-title h2 { margin: 0; color: #f1f5f9; font: 700 18px 'Chivo', sans-serif; text-transform: uppercase; }
-.impact-title p { margin: 3px 0 0; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
-.impact-countdown { border: 1px solid #273647; background: #010f1f; padding: 7px 9px; text-align: right; min-width: 165px; }
-.impact-countdown span { display: block; color: #ffb3ad; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
-.impact-countdown strong { color: #ff625d; font: 800 27px 'JetBrains Mono', monospace; line-height: 1.1; }
+.impact-title h2 { margin: 0; color: #F8FAFC; font: 700 18px 'Chivo', sans-serif; text-transform: uppercase; letter-spacing: -.02em; }
+.impact-title p { margin: 3px 0 0; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.impact-countdown { border: 1px solid #164E63; border-radius: 7px; background: #071F30; padding: 7px 9px; text-align: right; min-width: 165px; }
+.impact-countdown span { display: block; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.impact-countdown strong { color: #EF4444; font: 800 27px 'JetBrains Mono', monospace; line-height: 1.1; }
 .impact-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.impact-metrics > div { position: relative; overflow: hidden; background: #081a2e; border: 1px solid #273647; padding: 9px; }
-.impact-metrics span, .impact-metrics em { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; font-style: normal; }
-.impact-metrics strong { display: block; color: #ff625d; font: 700 18px 'JetBrains Mono', monospace; margin-top: 8px; }
-.impact-metrics strong small { color: #94a3b8; font-size: 9px; }
-.impact-metrics em { color: #ffb95f; margin-top: 4px; font-size: 7px; }
-.impact-metrics > div:first-child::after { content: ''; position: absolute; height: 4px; left: 9px; right: 9px; bottom: 6px; background: #273647; }
-.impact-metrics > div:first-child::before { content: ''; position: absolute; height: 4px; width: var(--risk-width, 0%); left: 9px; bottom: 6px; background: #ff5451; z-index: 1; }
-.amber-text { color: #ffb95f !important; }
-.tactical-dispatcher { background: rgba(14, 37, 57, .68); border: 1px solid rgba(148, 163, 184, .22); padding: 8px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.tactical-dispatcher label { display: block; color: #94a3b8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; margin: 10px 0 5px; }
-.tactical-dispatcher input { display: block; width: 100%; margin-top: 5px; box-sizing: border-box; border: 1px solid #273647; background: #010f1f; color: #d4e4fa; padding: 9px; font: 9px 'JetBrains Mono', monospace; }
-.dispatch-preview { border: 1px solid #273647; background: #010f1f; padding: 9px; margin-top: 8px; }
-.dispatch-preview > span { display: flex; justify-content: space-between; color: #ffb3ad; font: 8px 'JetBrains Mono', monospace; }
-.dispatch-preview > span b { color: #67e8f9; font-size: 7px; }
-.dispatch-preview p { color: #f1f5f9; font: 10px/1.45 'Chivo', sans-serif; margin: 10px 0 0; }
-.dispatch-preview .hindi { color: #ffb95f; }
-.dispatch-button { width: 100%; min-height: 40px; margin-top: 8px; border: 0; background: #ef1741; color: #fff; display: flex; align-items: center; justify-content: center; gap: 7px; font: 800 11px 'Chivo', sans-serif; text-transform: uppercase; cursor: pointer; }
-.dispatch-button:hover { background: #ff3658; }
-.methodology-card { width: 100%; border: 1px solid #273647; background: #0d1c2d; color: #d4e4fa; padding: 10px; display: flex; align-items: center; gap: 9px; text-align: left; cursor: pointer; }
-.methodology-card:hover { border-color: #67e8f9; }
-.methodology-card > svg { width: 16px; color: #ffb95f; flex: 0 0 auto; }
+.impact-metrics > div { position: relative; overflow: hidden; background: #10384A; border: 1px solid #164E63; border-radius: 6px; padding: 9px; }
+.impact-metrics span, .impact-metrics em { display: block; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; font-style: normal; }
+.impact-metrics strong { display: block; color: #F8FAFC; font: 700 18px 'JetBrains Mono', monospace; margin-top: 8px; }
+.impact-metrics strong small { color: #94A3B8; font-size: 9px; }
+.impact-metrics em { color: #06B6D4; margin-top: 4px; font-size: 7px; }
+.impact-metrics > div:first-child::after { content: ''; position: absolute; height: 4px; left: 9px; right: 9px; bottom: 6px; background: #071F30; }
+.impact-metrics > div:first-child::before { content: ''; position: absolute; height: 4px; width: var(--risk-width, 0%); left: 9px; bottom: 6px; background: #EF4444; z-index: 1; }
+.amber-text { color: #FBBF24 !important; }
+
+.tactical-dispatcher {
+  background: #0B2638;
+  border: 1px solid #164E63;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: inset 0 1px 0 rgba(22, 78, 99, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.tactical-dispatcher label { display: block; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; text-transform: uppercase; margin: 10px 0 5px; }
+.tactical-dispatcher input { display: block; width: 100%; margin-top: 5px; box-sizing: border-box; border: 1px solid #164E63; border-radius: 6px; background: #071F30; color: #F8FAFC; padding: 9px; font: 9px 'JetBrains Mono', monospace; }
+.dispatch-preview { border: 1px solid #164E63; border-radius: 6px; background: #071F30; padding: 9px; margin-top: 8px; }
+.dispatch-preview > span { display: flex; justify-content: space-between; color: #94A3B8; font: 8px 'JetBrains Mono', monospace; }
+.dispatch-preview > span b { color: #06B6D4; font-size: 7px; }
+.dispatch-preview p { color: #F8FAFC; font: 10px/1.45 'Chivo', sans-serif; margin: 10px 0 0; }
+.dispatch-preview .hindi { color: #FBBF24; }
+
+.dispatch-button {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 7px;
+  background: #EF4444;
+  color: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font: 800 11px 'Chivo', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), 0 10px 18px rgba(239, 68, 68, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.15s ease;
+}
+.dispatch-button:hover { background: #DC2626; }
+.dispatch-button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4); }
+
+.methodology-card { width: 100%; border: 1px solid #164E63; border-radius: 6px; background: #0B2638; color: #F8FAFC; padding: 10px; display: flex; align-items: center; gap: 9px; text-align: left; cursor: pointer; transition: all 160ms ease; }
+.methodology-card:hover { border-color: #06B6D4; background: #10384A; }
+.methodology-card > svg { width: 16px; color: #06B6D4; flex: 0 0 auto; }
 .methodology-card span { flex: 1; }
 .methodology-card small, .methodology-card strong { display: block; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
-.methodology-card small { color: #ab8986; font-size: 8px; }
-.methodology-card strong { color: #d4e4fa; font-size: 11px; margin-top: 4px; }
-.methodology-card > svg:last-child { color: #94a3b8; }
-.tactical-evacuation-card { background: #0d1c2d; border: 1px solid #ff5451; padding: 18px; display: flex; align-items: center; gap: 12px; }
-.tactical-evacuation-card > svg { color: #ff625d; width: 26px; height: 26px; }
-.tactical-evacuation-card strong { color: #ffb3ad; font: 700 16px 'Chivo', sans-serif; text-transform: uppercase; }
-.tactical-evacuation-card p { margin: 4px 0 0; color: #94a3b8; font: 11px/1.4 'Chivo', sans-serif; }
-.tactical-evacuation-card button { margin-left: auto; border: 0; background: #ef1741; color: #fff; padding: 10px 12px; display: flex; align-items: center; gap: 6px; font: 800 9px 'JetBrains Mono', monospace; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
-.tactical-main > .glass-panel, .tactical-main > div > .glass-panel { border-radius: 2px; }
-.tactical-main .leaflet-container { height: 480px !important; border-radius: 2px; }
+.methodology-card small { color: #94A3B8; font-size: 8px; }
+.methodology-card strong { color: #F8FAFC; font-size: 11px; margin-top: 4px; }
+.methodology-card > svg:last-child { color: #06B6D4; }
+
+.tactical-evacuation-card { background: #0B2638; border: 1px solid #164E63; border-radius: 8px; padding: 18px; display: flex; align-items: center; gap: 12px; }
+.tactical-evacuation-card > svg { color: #06B6D4; width: 26px; height: 26px; }
+.tactical-evacuation-card strong { color: #F8FAFC; font: 700 16px 'Chivo', sans-serif; text-transform: uppercase; }
+.tactical-evacuation-card p { margin: 4px 0 0; color: #94A3B8; font: 11px/1.4 'Chivo', sans-serif; }
+.tactical-evacuation-card button {
+  margin-left: auto;
+  border: 0;
+  border-radius: 7px;
+  background: #EF4444;
+  color: #F8FAFC;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 800 9px 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), 0 10px 18px rgba(239, 68, 68, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.tactical-evacuation-card button:hover { background: #DC2626; }
+.tactical-evacuation-card button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4); }
+
+.tactical-main > .glass-panel, .tactical-main > div > .glass-panel { border-radius: 8px; }
+.tactical-main .leaflet-container { height: 480px !important; border-radius: 8px; }
 .tactical-main .relative.w-full.h-\[520px\] { height: 480px; }
-.tactical-main > .rounded-md, .tactical-rail > .rounded-xl, .tactical-rail > .glass-panel { border-radius: 2px; }
+.tactical-main > .rounded-md, .tactical-rail > .rounded-xl, .tactical-rail > .glass-panel { border-radius: 8px; }
 .tactical-rail .glass-panel { min-height: 300px; }
 .tactical-rail .glass-panel.rounded-xl { height: auto; }
 .tactical-rail .glass-panel.rounded-xl > div:first-child h2 { font-size: 16px; }
@@ -412,30 +570,27 @@
 .tactical-storm-control { display: block; min-width: 0; }
 .center-hydrograph { display: none; }
 .rail-hydrograph { display: block; }
-.hydrograph-card { background: #071a2c; border: 1px solid #273647; padding: 8px; }
-.hydrograph-heading, .hydrograph-axis { display: flex; justify-content: space-between; gap: 8px; color: #d4e4fa; font: 8px 'JetBrains Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
-.hydrograph-heading span:last-child { color: #67e8f9; }
+.hydrograph-card { background: #0B2638; border: 1px solid #164E63; border-radius: 8px; padding: 8px; }
+.hydrograph-heading, .hydrograph-axis { display: flex; justify-content: space-between; gap: 8px; color: #F8FAFC; font: 8px 'JetBrains Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
+.hydrograph-heading span:last-child { color: #06B6D4; }
 .hydrograph-heading b { display: inline-block; width: 12px; height: 2px; vertical-align: middle; margin: 0 3px; }
-.cyan-line { background: #22d3ee; } .amber-line { background: #f59e0b; }
+.cyan-line { background: #06B6D4; } .amber-line { background: #FBBF24; }
 .hydrograph-card svg { display: block; width: 100%; height: 102px; margin-top: 5px; }
-.hydrograph-card line { stroke: #273647; stroke-width: 1; stroke-dasharray: 3 4; }
-.hydrograph-card .threshold-line { stroke: #ef4444; stroke-dasharray: 5 3; }
+.hydrograph-card line { stroke: #164E63; stroke-width: 1; stroke-dasharray: 3 4; }
+.hydrograph-card .threshold-line { stroke: #EF4444; stroke-dasharray: 5 3; }
 .hydrograph-card path { fill: none; stroke-width: 2.3; }
-.hydro-cyan { stroke: #22d3ee; } .hydro-amber { stroke: #f59e0b; stroke-dasharray: 4 3; }
-.hydrograph-axis { color: #94a3b8; font-size: 7px; margin-top: -1px; }
-.hydrograph-axis strong { color: #67e8f9; }
+.hydro-cyan { stroke: #06B6D4; } .hydro-amber { stroke: #FBBF24; stroke-dasharray: 4 3; }
+.hydrograph-axis { color: #94A3B8; font-size: 7px; margin-top: -1px; }
+.hydrograph-axis strong { color: #F8FAFC; }
 
-/* Live Recharts hydrograph (components/HydrographChart.jsx).
-   Deliberately its own class namespace: the .hydrograph-card rules above target every svg,
-   path and line inside them, which would have pinned a Recharts chart to 102px and restyled
-   its axes and grid. Those rules belong to the old hand-drawn bezier sparkline this replaced. */
-.hydrograph-live { background: #071a2c; border: 1px solid #273647; padding: 8px; }
+/* Live Recharts hydrograph */
+.hydrograph-live { background: #0B2638; border: 1px solid #164E63; border-radius: 8px; padding: 8px; }
 .hydrograph-live-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  color: #d4e4fa;
+  color: #F8FAFC;
   font: 8px 'JetBrains Mono', monospace;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -444,25 +599,64 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: #94a3b8;
+  color: #94A3B8;
   white-space: nowrap;
 }
 .hydrograph-live-legend b { display: inline-block; width: 11px; height: 2px; }
-.hydrograph-live-legend .lg-cyan { background: #22d3ee; }
-.hydrograph-live-legend .lg-amber { background: #f59e0b; }
-.hydrograph-live-legend .lg-rose { background: #f43f5e; }
+.hydrograph-live-legend .lg-cyan { background: #06B6D4; }
+.hydrograph-live-legend .lg-amber { background: #FBBF24; }
+.hydrograph-live-legend .lg-rose { background: #EF4444; }
 .hydrograph-live-foot {
   display: flex;
   justify-content: space-between;
   gap: 8px;
   margin-top: 2px;
-  color: #94a3b8;
+  color: #94A3B8;
   font: 7px 'JetBrains Mono', monospace;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.hydrograph-live-foot strong { color: #67e8f9; }
+.hydrograph-live-foot strong { color: #06B6D4; }
 .hydrograph-live .recharts-wrapper { max-width: 100%; }
+
+/* Header and navigation finishing */
+.app-shell > header {
+  border-color: #164E63;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.app-shell > header > div:first-child {
+  background: #071F30;
+  border-bottom: 1px solid #164E63;
+  color: #94A3B8;
+}
+
+.app-shell > header > div:last-child {
+  background: rgba(7, 31, 48, 0.96);
+  border-bottom: 1px solid #164E63;
+}
+
+.app-shell > header > div:last-child button,
+.app-shell > header > div:last-child a {
+  border: 1px solid #164E63;
+  background: #10384A;
+  border-radius: 7px;
+  color: #F8FAFC;
+}
+
+.app-shell > header > div:last-child button:hover,
+.app-shell > header > div:last-child a:hover {
+  border-color: #06B6D4;
+  background: #164E63;
+  color: #22D3EE;
+}
+
+.tactical-sidebar button:focus-visible,
+.tactical-main button:focus-visible,
+.tactical-rail button:focus-visible {
+  outline: 2px solid #06B6D4;
+  outline-offset: 2px;
+}
 
 @media (max-width: 1100px) {
   .app-shell > header { height: auto; }
@@ -476,21 +670,22 @@
 }
 
 @media (max-width: 720px) {
-  .app-shell { padding-top: 12px !important; }
+  .app-shell { padding-top: 12px !important; padding-left: 10px !important; padding-right: 10px !important; }
   .app-shell > footer { display: flex; }
   .app-shell > header { height: auto; }
   .app-shell > header > div:first-child { display: flex; }
   .app-shell > header > div:last-child { height: auto; min-height: 38px; }
   .app-shell > header > div:last-child h1 { font-size: 12px; }
   .app-shell > .tactical-context { display: flex; }
-  .tactical-console { display: flex; flex-direction: column; }
-  .tactical-sidebar { min-height: 0; order: 3; }
+  .tactical-console { display: flex; flex-direction: column; gap: 10px; }
+  .tactical-sidebar { min-height: 0; order: 3; padding: 8px; }
   .tactical-sidebar .tactical-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tactical-sidebar .tactical-nav button { min-height: 44px; }
   .tactical-sidebar .priority-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tactical-main { order: 1; }
   .tactical-rail { order: 2; display: grid; grid-template-columns: 1fr; }
   .tactical-rail .tactical-section-heading, .tactical-rail .telemetry-matrix { grid-column: auto; }
-  .tactical-main .leaflet-container, .tactical-main .relative.w-full.h-\[520px\] { height: 360px !important; }
+  .tactical-main .leaflet-container, .tactical-main .relative.w-full.h-\[520px\] { height: 340px !important; }
   .tactical-storm-control { display: block; }
   .center-hydrograph { display: block; }
   .rail-hydrograph { display: none; }
@@ -500,164 +695,4 @@
   .impact-metrics { grid-template-columns: 1fr; }
   .tactical-evacuation-card { align-items: flex-start; flex-wrap: wrap; }
   .tactical-evacuation-card button { margin-left: 0; width: 100%; justify-content: center; }
-}
-
-/* Control-room finish pass: calmer surfaces, clearer priority, and consistent controls. */
-.app-shell {
-  background-color: #07111f;
-  background-image: radial-gradient(circle at 50% -20%, rgba(98, 217, 239, .08), transparent 34%);
-}
-
-.app-shell > header {
-  border-color: rgba(98, 217, 239, .2);
-  box-shadow: 0 10px 30px rgba(1, 12, 25, .24);
-}
-
-.app-shell > header > div:first-child {
-  background: #061321;
-  border-bottom: 1px solid rgba(42, 64, 87, .7);
-}
-
-.app-shell > header > div:last-child {
-  background: rgba(13, 26, 43, .96);
-}
-
-.app-shell > header > div:last-child button,
-.app-shell > header > div:last-child a {
-  border: 1px solid #2a4057;
-  background: #13243a;
-  border-radius: 7px;
-}
-
-.app-shell > header > div:last-child button:hover,
-.app-shell > header > div:last-child a:hover {
-  border-color: #62d9ef;
-  background: #1a3047;
-}
-
-.tactical-console {
-  gap: 10px;
-}
-
-.tactical-sidebar,
-.tactical-section-heading,
-.tactical-dispatcher,
-.tactical-rail .glass-panel {
-  border-color: rgba(157, 176, 196, .24);
-  box-shadow: 0 12px 28px rgba(1, 12, 25, .2), inset 0 1px 0 rgba(255, 255, 255, .06);
-}
-
-.tactical-sidebar {
-  background: #0b1a2b;
-  padding: 10px 8px;
-}
-
-.tactical-nav button {
-  min-height: 42px;
-  border-radius: 7px;
-  color: #a8b9ca;
-}
-
-.tactical-nav button:hover {
-  background: #173049;
-  color: #e4eef9;
-}
-
-.tactical-nav button.active {
-  background: linear-gradient(180deg, #b82349 0%, #921c3c 100%);
-  border-color: #ff7180;
-  box-shadow: 0 5px 12px rgba(185, 35, 73, .2), inset 0 1px 0 rgba(255, 255, 255, .16);
-}
-
-.priority-item,
-.telemetry-matrix > div,
-.impact-metrics > div,
-.hydrograph-live,
-.hydrograph-card {
-  border-color: #2a4057;
-  background: #0d1d30;
-}
-
-.priority-item:hover,
-.methodology-card:hover,
-.tactical-evacuation-card:hover {
-  border-color: #62d9ef;
-  background: #122840;
-}
-
-.priority-item {
-  border-left-width: 1px;
-  border-radius: 6px;
-}
-
-.app-shell .tactical-section-heading {
-  border-left-width: 1px;
-}
-
-.tactical-main > .glass-panel,
-.tactical-main > div > .glass-panel,
-.tactical-rail > .glass-panel {
-  box-shadow: 0 14px 30px rgba(1, 12, 25, .22), inset 0 1px 0 rgba(255, 255, 255, .06);
-}
-
-.tactical-impact-card {
-  border-radius: 8px;
-  padding: 12px;
-}
-
-.impact-title h2 {
-  letter-spacing: -.02em;
-  text-wrap: balance;
-}
-
-.impact-countdown {
-  border-radius: 7px;
-  border-color: rgba(255, 107, 107, .4);
-  background: #081524;
-}
-
-.dispatch-button,
-.emergency-override,
-.tactical-evacuation-card button {
-  border-radius: 7px;
-  box-shadow: 0 4px 0 rgba(70, 7, 24, .75), 0 10px 18px rgba(225, 29, 72, .18),
-    inset 0 1px 0 rgba(255, 255, 255, .16);
-}
-
-.dispatch-button:active,
-.emergency-override:active,
-.tactical-evacuation-card button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(70, 7, 24, .75), 0 5px 10px rgba(225, 29, 72, .14);
-}
-
-.tactical-sidebar button:focus-visible,
-.tactical-main button:focus-visible,
-.tactical-rail button:focus-visible {
-  outline: 2px solid #62d9ef;
-  outline-offset: 2px;
-}
-
-@media (max-width: 720px) {
-  .app-shell {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  .tactical-console {
-    gap: 10px;
-  }
-
-  .tactical-sidebar {
-    padding: 8px;
-  }
-
-  .tactical-sidebar .tactical-nav button {
-    min-height: 44px;
-  }
-
-  .tactical-main .leaflet-container,
-  .tactical-main .relative.w-full.h-\[520px\] {
-    height: 340px !important;
-  }
 }

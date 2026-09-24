@@ -38,8 +38,8 @@ const FEASIBILITY_COLOR = {
 const SHELTER_ICON = L.divIcon({
   className: 'custom-shelter-pin',
   html: `
-    <div style="width: 18px; height: 18px; border-radius: 3px; background: #04121f; border: 2px solid #34d399; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px #34d39999;">
-      <span style="font-size: 9px; line-height: 1; color: #34d399; font-weight: 800;">S</span>
+    <div style="width: 18px; height: 18px; border-radius: 3px; background: #0B2638; border: 2px solid #06B6D4; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(6,182,212,0.6);">
+      <span style="font-size: 9px; line-height: 1; color: #06B6D4; font-weight: 800;">S</span>
     </div>
   `,
   iconSize: [18, 18],
@@ -56,7 +56,7 @@ const createCustomMarkerIcon = (riskLevel, score, isNepal) => {
     html: `
       <div style="position: relative; display: flex; align-items: center; justify-content: center;">
         ${riskLevel === 'red' ? `<div style="position: absolute; width: 28px; height: 28px; border-radius: 50%; background: ${color}; opacity: 0.4;" class="${pulseClass}"></div>` : ''}
-        <div style="width: 24px; height: 24px; border-radius: 50%; background: #111827; border: 2.5px solid ${color}; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px ${color}99; font-weight: 800; font-size: 10px; color: ${color};">
+        <div style="width: 24px; height: 24px; border-radius: 50%; background: #0B2638; border: 2.5px solid ${color}; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px ${color}99; font-weight: 800; font-size: 10px; color: ${color};">
           ${Math.round(score || 0)}
         </div>
         ${isNepal ? `<div style="position: absolute; top: -6px; right: -6px; font-size: 9px; line-height: 1;">🇳🇵</div>` : ''}
@@ -266,7 +266,7 @@ export default function MapComponent({
                     {onOpenVillage && (
                       <button
                         onClick={() => onOpenVillage(v)}
-                        className="w-full text-center py-1 mt-1 bg-cyan-500/20 border border-cyan-500/50 hover:bg-cyan-500/30 text-cyan-200 rounded text-xs font-medium transition"
+                        className="w-full text-center py-1 mt-1 bg-[#10384A] border border-[#164E63] hover:bg-[#164E63] text-[#F8FAFC] rounded text-xs font-medium transition"
                       >
                         Open Full Node Page ↗
                       </button>

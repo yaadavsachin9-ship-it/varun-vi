@@ -148,17 +148,17 @@ export default function VillageDetailPanel({ village, onOpenExplainer }) {
           <LineChart data={historyData.length > 0 ? historyData : [
             { time: '00:00', rainfall_mm: village.latest_rainfall_mm, soil_moisture_pct: village.latest_soil_moisture_pct, risk_score: village.current_risk_score }
           ]}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" />
-            <XAxis dataKey="time" stroke="#6b7280" tick={{ fontSize: 9 }} />
-            <YAxis yAxisId="left" stroke="#3b82f6" tick={{ fontSize: 9 }} domain={[0, 'auto']} />
-            <YAxis yAxisId="right" orientation="right" stroke="#10b981" tick={{ fontSize: 9 }} domain={[0, 100]} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#164E63" strokeOpacity={0.5} />
+            <XAxis dataKey="time" stroke="#94A3B8" strokeOpacity={0.6} tick={{ fontSize: 9, fill: '#94A3B8' }} />
+            <YAxis yAxisId="left" stroke="#06B6D4" tick={{ fontSize: 9, fill: '#06B6D4' }} domain={[0, 'auto']} />
+            <YAxis yAxisId="right" orientation="right" stroke="#10B981" tick={{ fontSize: 9, fill: '#10B981' }} domain={[0, 100]} />
             <Tooltip 
-              contentStyle={{ backgroundColor: '#111827', borderColor: '#374151', fontSize: '11px' }}
+              contentStyle={{ backgroundColor: '#071F30', borderColor: '#164E63', color: '#F8FAFC', fontSize: '11px', borderRadius: '4px' }}
             />
             <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '4px' }} />
-            <Line yAxisId="left" type="monotone" dataKey="rainfall_mm" name="Rain (mm/h)" stroke="#3b82f6" strokeWidth={2} dot={false} />
-            <Line yAxisId="right" type="monotone" dataKey="soil_moisture_pct" name="Soil Moisture (%)" stroke="#10b981" strokeWidth={2} dot={false} />
-            <Line yAxisId="right" type="monotone" dataKey="risk_score" name="Risk Score" stroke="#ef4444" strokeWidth={2} dot={false} />
+            <Line yAxisId="left" type="monotone" dataKey="rainfall_mm" name="Rain (mm/h)" stroke="#06B6D4" strokeWidth={2} dot={false} />
+            <Line yAxisId="right" type="monotone" dataKey="soil_moisture_pct" name="Soil Moisture (%)" stroke="#10B981" strokeWidth={2} dot={false} />
+            <Line yAxisId="right" type="monotone" dataKey="risk_score" name="Risk Score" stroke="#EF4444" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>

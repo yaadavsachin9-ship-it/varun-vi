@@ -51,21 +51,21 @@ function OptionRow({ opt, recommended, onHover }) {
       onMouseLeave={() => onHover?.(null)}
       className={`rounded-md border p-2.5 transition ${
         recommended
-          ? 'border-cyan-400/50 bg-cyan-500/[0.07]'
-          : 'border-[#273647] bg-[#071a2c] hover:border-[#3a4d63]'
+          ? 'border-[#06B6D4] bg-[#10384A]'
+          : 'border-[#164E63] bg-[#0B2638] hover:border-[#06B6D4]'
       }`}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[13px] font-semibold text-white truncate">{opt.shelter_name}</span>
+            <span className="text-[13px] font-semibold text-[#F8FAFC] truncate">{opt.shelter_name}</span>
             {recommended && (
-              <span className="telemetry text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-400 text-[#04121f] font-bold">
+              <span className="telemetry text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#06B6D4] text-[#061826] font-bold">
                 Recommended
               </span>
             )}
             {!opt.serves_this_village && (
-              <span className="telemetry text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#1c2b3c] text-slate-400">
+              <span className="telemetry text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#071F30] text-[#94A3B8]">
                 Neighbouring village
               </span>
             )}
@@ -75,7 +75,7 @@ function OptionRow({ opt, recommended, onHover }) {
               </span>
             )}
           </div>
-          <span className="telemetry text-[9px] uppercase tracking-wider text-slate-500">
+          <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8]">
             {opt.shelter_type?.replace(/_/g, ' ')} · {SURFACE_LABEL[opt.route_surface] || opt.route_surface}
           </span>
         </div>
@@ -88,53 +88,53 @@ function OptionRow({ opt, recommended, onHover }) {
 
       <div className="grid grid-cols-4 gap-2 mt-2">
         <div>
-          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">On foot</span>
-          <strong className="text-sm text-white">
+          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">On foot</span>
+          <strong className="text-sm text-[#F8FAFC]">
             {Math.round(opt.walking_time_min)}
-            <small className="text-[9px] text-slate-400 ml-0.5">min</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5">min</small>
           </strong>
         </div>
         <div>
-          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
             {opt.elevation_gain_m < 0 ? 'Descent' : 'Climb'}
           </span>
-          <strong className={`text-sm ${opt.elevation_gain_m < 0 ? 'text-rose-300' : 'text-white'}`}>
+          <strong className={`text-sm ${opt.elevation_gain_m < 0 ? 'text-rose-300' : 'text-[#F8FAFC]'}`}>
             {Math.abs(Math.round(opt.elevation_gain_m))}
-            <small className="text-[9px] text-slate-400 ml-0.5">m</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5">m</small>
           </strong>
         </div>
         <div>
-          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">Path</span>
-          <strong className="text-sm text-white">
+          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">Path</span>
+          <strong className="text-sm text-[#F8FAFC]">
             {(opt.path_length_m / 1000).toFixed(2)}
-            <small className="text-[9px] text-slate-400 ml-0.5">km</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5">km</small>
           </strong>
         </div>
         <div>
-          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">Safety</span>
+          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">Safety</span>
           <strong
             className={`text-sm ${
               opt.safety_score >= 70
-                ? 'text-emerald-300'
+                ? 'text-emerald-400'
                 : opt.safety_score >= 45
-                  ? 'text-amber-300'
-                  : 'text-rose-300'
+                  ? 'text-amber-400'
+                  : 'text-rose-400'
             }`}
           >
             {opt.safety_score}
-            <small className="text-[9px] text-slate-400 ml-0.5">/100</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5">/100</small>
           </strong>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 flex-wrap mt-2 pt-2 border-t border-[#1d2c3f]">
-        <span className="telemetry text-[9px] text-slate-400 flex items-center gap-1">
-          <Mountain className="w-3 h-3" /> {Math.round(opt.elevation_m)} m · {opt.grade_pct}% grade
+      <div className="flex items-center gap-3 flex-wrap mt-2 pt-2 border-t border-[#164E63]/40">
+        <span className="telemetry text-[9px] text-[#94A3B8] flex items-center gap-1">
+          <Mountain className="w-3 h-3 text-[#06B6D4]" /> {Math.round(opt.elevation_m)} m · {opt.grade_pct}% grade
         </span>
-        <span className="telemetry text-[9px] text-slate-400 flex items-center gap-1">
-          <Footprints className="w-3 h-3" /> {opt.tobler_speed_kmh} km/h Tobler
+        <span className="telemetry text-[9px] text-[#94A3B8] flex items-center gap-1">
+          <Footprints className="w-3 h-3 text-[#06B6D4]" /> {opt.tobler_speed_kmh} km/h Tobler
         </span>
-        <span className="telemetry text-[9px] text-slate-400 flex items-center gap-1">
+        <span className="telemetry text-[9px] text-[#94A3B8] flex items-center gap-1">
           <Users className="w-3 h-3" /> {opt.capacity}
         </span>
         {opt.contact_phone && (
@@ -200,8 +200,8 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
 
   if (!plan) {
     return (
-      <div className="rounded-md border border-[#273647] bg-[#071a2c] p-3">
-        <span className="telemetry text-[9px] uppercase tracking-wider text-slate-500">
+      <div className="rounded-md border border-[#164E63] bg-[#0B2638] p-3">
+        <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8]">
           Costing evacuation routes…
         </span>
       </div>
@@ -217,10 +217,10 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
   return (
     <div className="flex flex-col gap-2.5">
       {/* ---- The headline comparison: time needed vs time available ---- */}
-      <div className="rounded-md border border-[#273647] bg-[#0d1c2d] p-3">
+      <div className="rounded-md border border-[#164E63] bg-[#0B2638] p-3">
         <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="telemetry text-[9px] uppercase tracking-wider text-[#ab8986] flex items-center gap-1.5">
-            <RouteIcon className="w-3.5 h-3.5 text-cyan-300" />
+          <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8] flex items-center gap-1.5">
+            <RouteIcon className="w-3.5 h-3.5 text-[#06B6D4]" />
             Can they get out in time?
           </span>
           <div className="flex items-center gap-1.5">
@@ -228,8 +228,8 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
               onClick={() => setIsNight((n) => !n)}
               className={`telemetry flex items-center gap-1 text-[9px] uppercase tracking-wider px-2 py-1 rounded border transition ${
                 isNight
-                  ? 'border-indigo-400/50 bg-indigo-500/15 text-indigo-200'
-                  : 'border-[#273647] bg-[#071a2c] text-slate-400 hover:text-slate-200'
+                  ? 'border-cyan-400/50 bg-cyan-500/15 text-cyan-200'
+                  : 'border-[#164E63] bg-[#10384A] text-[#94A3B8] hover:text-[#F8FAFC]'
               }`}
               title="Night raises walking time by 1.20x on unlit hill tracks"
             >
@@ -238,7 +238,7 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
             </button>
             <button
               onClick={() => load(isNight)}
-              className="p-1 rounded border border-[#273647] bg-[#071a2c] text-slate-400 hover:text-cyan-300"
+              className="p-1 rounded border border-[#164E63] bg-[#10384A] text-[#94A3B8] hover:text-[#06B6D4]"
               title="Re-cost routes now"
             >
               <RefreshCw className={`w-3 h-3 ${busy ? 'animate-spin' : ''}`} />
@@ -248,39 +248,39 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
 
         <div className="grid grid-cols-3 gap-2">
           <div>
-            <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+            <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
               Walk needed
             </span>
-            <strong className="text-lg font-bold text-white">
+            <strong className="text-lg font-bold text-[#F8FAFC]">
               {walk !== null ? Math.round(walk) : '—'}
-              <small className="text-[10px] text-slate-400 ml-1">min</small>
+              <small className="text-[10px] text-[#94A3B8] ml-1">min</small>
             </strong>
           </div>
           <div>
-            <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+            <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
               Usable window
             </span>
             <strong className="text-lg font-bold text-amber-300">
               {usable !== null ? Math.round(usable) : '—'}
-              <small className="text-[10px] text-slate-400 ml-1">min</small>
+              <small className="text-[10px] text-[#94A3B8] ml-1">min</small>
             </strong>
           </div>
           <div>
-            <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+            <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
               Margin
             </span>
             <strong
               className={`text-lg font-bold ${
-                margin === null ? 'text-slate-400' : margin >= 0 ? 'text-emerald-300' : 'text-rose-400'
+                margin === null ? 'text-[#94A3B8]' : margin >= 0 ? 'text-emerald-400' : 'text-rose-400'
               }`}
             >
               {margin === null ? '—' : `${margin >= 0 ? '+' : ''}${Math.round(margin)}`}
-              <small className="text-[10px] text-slate-400 ml-1">min</small>
+              <small className="text-[10px] text-[#94A3B8] ml-1">min</small>
             </strong>
           </div>
         </div>
 
-        <p className="telemetry text-[8px] uppercase tracking-wider text-slate-500 mt-2 leading-relaxed">
+        <p className="telemetry text-[8px] uppercase tracking-wider text-[#94A3B8] mt-2 leading-relaxed">
           Window = {plan.lead_time_hrs.toFixed(1)} h modelled lead time x 0.70 safety fraction.
           The remaining 30% absorbs alerting latency, household mobilisation and the
           elderly/child tail of the crowd.
@@ -289,11 +289,11 @@ export default function EvacuationRoutePanel({ villageId, onRouteHover, onPlanLo
 
       {/* ---- Bilingual advisory: the actual instruction that goes out ---- */}
       {plan.advisory && (
-        <div className="rounded-md border-l-2 border-l-cyan-400 border border-[#273647] bg-[#071a2c] p-2.5">
-          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#ab8986] mb-1">
+        <div className="rounded-md border-l-2 border-l-[#06B6D4] border border-[#164E63] bg-[#0B2638] p-2.5">
+          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8] mb-1">
             Advisory dispatched with the alert
           </span>
-          <p className="text-[11px] text-slate-200 leading-relaxed">{plan.advisory.en}</p>
+          <p className="text-[11px] text-[#F8FAFC] leading-relaxed">{plan.advisory.en}</p>
           <p className="text-[11px] text-amber-100/90 leading-relaxed mt-1.5">{plan.advisory.hi}</p>
         </div>
       )}

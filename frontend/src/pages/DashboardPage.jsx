@@ -149,38 +149,42 @@ export default function DashboardPage() {
   }[dispatch.status];
 
   return (
-    <div className={`app-shell risk-zone-${selectedZone} min-h-screen text-gray-100 px-3 pb-24 pt-0 md:px-5 md:pb-24 font-sans`}>
-      <header className="sticky top-0 inset-x-0 z-[1100] bg-[#051424]/95 backdrop-blur-xl border-b border-[#273647] mb-3 md:mb-4 md:border md:rounded-lg">
-        <div className="bg-[#010f1f] px-3 py-1.5 flex items-center justify-between gap-2 overflow-hidden">
-          <div className="flex items-center gap-1.5 min-w-0">
+    <div className={`app-shell risk-zone-${selectedZone} min-h-screen text-[#F8FAFC] px-3 pb-24 pt-0 md:px-5 md:pb-24 font-sans`}>
+      <header className="sticky top-0 inset-x-0 z-[1100] rgb-top-beam bg-[#071F30]/95 backdrop-blur-xl border-b border-[#164E63] mb-3 md:mb-4 md:border md:rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
+        <div className="bg-[#071F30] px-3 py-1.5 flex items-center justify-between gap-2 overflow-hidden border-b border-[#164E63]">
+          <div className="flex items-center gap-2 min-w-0">
             <span
-              className={`w-2 h-2 rounded-full shrink-0 ${wsConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-400'}`}
+              className={`w-2 h-2 rounded-full shrink-0 ${wsConnected ? 'bg-[#10B981] shadow-[0_0_8px_#10B981] animate-pulse' : 'bg-[#EF4444] shadow-[0_0_8px_#EF4444]'}`}
             />
-            <span className="telemetry text-[9px] text-emerald-300 uppercase tracking-wider truncate">
-              {wsConnected ? 'Live • WebSocket Connected' : 'Connecting Sensor Stream'}
+            <span className="telemetry text-[9px] text-[#06B6D4] uppercase tracking-wider truncate font-semibold">
+              {wsConnected ? 'Live • WebSocket Sensor Stream Connected' : 'Connecting Sensor Stream'}
             </span>
             {loadError && (
-              <span className="telemetry text-[9px] text-rose-300 uppercase tracking-wider truncate">
+              <span className="telemetry text-[9px] text-[#EF4444] uppercase tracking-wider truncate">
                 • {loadError}
               </span>
             )}
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <span className="telemetry rgb-badge px-2 py-0.5 rounded text-[8.5px] uppercase tracking-wider text-[#F8FAFC] flex items-center gap-1 font-bold border border-[#164E63] bg-[#10384A]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-ping" />
+              RGB CHROMA
+            </span>
             {isDemo && (
-              <span className="telemetry text-[9px] text-amber-300 uppercase tracking-wider">
+              <span className="telemetry text-[9px] text-[#FBBF24] uppercase tracking-wider">
                 Demo auth
               </span>
             )}
-            <span className="telemetry zone-status-label text-[9px] uppercase tracking-wider hidden sm:inline">
+            <span className="telemetry zone-status-label text-[9px] uppercase tracking-wider hidden sm:inline font-bold text-[#94A3B8]">
               NDRF-OPS / {selectedZone.toUpperCase()} ZONE
             </span>
           </div>
         </div>
 
         {criticalCount > 0 && (
-          <div className="bg-[#93000a]/45 px-3 py-1.5 flex items-center gap-2 overflow-hidden">
-            <AlertTriangle className="w-3.5 h-3.5 text-[#ffb3ad] shrink-0" />
-            <span className="telemetry text-[9px] text-[#ffb3ad] uppercase tracking-wider truncate">
+          <div className="bg-[#EF4444]/15 border-b border-[#EF4444]/40 px-3 py-1.5 flex items-center gap-2 overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+            <AlertTriangle className="w-3.5 h-3.5 text-[#EF4444] shrink-0 animate-pulse" />
+            <span className="telemetry text-[9px] text-[#EF4444] uppercase tracking-wider truncate font-bold">
               Critical: mandatory evacuation • {criticalCount} sector
               {criticalCount > 1 ? 's' : ''} red alert
             </span>
@@ -188,51 +192,53 @@ export default function DashboardPage() {
         )}
 
         <div className="px-3 py-2.5 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <div className="w-9 h-9 rounded bg-white border border-[#273647] flex items-center justify-center shrink-0 overflow-hidden">
-              <img src="/varun-vi-logo.png" alt="VARUN-VI logo" className="w-full h-full object-cover" />
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-9 h-9 rounded bg-[#10384A] border border-[#164E63] flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_12px_rgba(6,182,212,0.15)]">
+              <img src="/varun-vi-logo.png" alt="VARUN-VI logo" className="w-full h-full object-contain p-1" />
             </div>
             <div className="min-w-0">
-              <span className="telemetry block text-[9px] text-[#ab8986] uppercase tracking-wider truncate">
+              <span className="telemetry block text-[9px] text-[#06B6D4] uppercase tracking-wider truncate">
                 {operatorEmail ? `OPERATOR · ${operatorEmail}` : 'EOC COMMAND SHELL'}
               </span>
-              <h1 className="text-base md:text-xl font-bold uppercase tracking-tight text-white truncate">
-                Command Center <span className="text-cyan-300">|</span> Flash Flood Tactical
+              <h1 className="text-base md:text-xl font-extrabold uppercase tracking-tight text-[#F8FAFC] truncate flex items-center gap-1.5">
+                <span className="rgb-chroma-text">Command Center</span>
+                <span className="text-[#06B6D4]">|</span>
+                <span className="text-[#94A3B8]">Flash Flood Tactical</span>
               </h1>
             </div>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
             <Link
               to="/backtest"
-              className="w-10 h-10 rounded bg-[#122131] text-cyan-300 flex items-center justify-center hover:bg-[#1a2c40]"
+              className="w-10 h-10 rounded bg-[#10384A] border border-[#164E63] text-[#F8FAFC] flex items-center justify-center hover:bg-[#164E63] hover:text-[#22D3EE] hover:border-[#06B6D4] transition-all"
               title="Historical event backtest"
             >
               <History className="w-4 h-4" />
             </Link>
             <Link
               to="/citizen"
-              className="w-10 h-10 rounded bg-[#122131] text-emerald-300 flex items-center justify-center hover:bg-[#1a2c40]"
+              className="w-10 h-10 rounded bg-[#10384A] border border-[#164E63] text-[#06B6D4] flex items-center justify-center hover:bg-[#164E63] hover:text-[#22D3EE] hover:border-[#06B6D4] transition-all"
               title="Citizen view (public)"
             >
               <Smartphone className="w-4 h-4" />
             </Link>
             <button
               onClick={() => setExplainerOpen(true)}
-              className="w-10 h-10 rounded bg-[#122131] text-[#ffb3ad] flex items-center justify-center hover:bg-[#1a2c40]"
+              className="w-10 h-10 rounded bg-[#10384A] border border-[#164E63] text-[#FBBF24] flex items-center justify-center hover:bg-[#164E63] hover:border-[#FBBF24] transition-all"
               title="Open lead-time formula"
             >
               <Bell className="w-4 h-4" />
             </button>
             <button
               onClick={reload}
-              className="w-10 h-10 rounded bg-[#ffb3ad] text-[#68000a] flex items-center justify-center hover:bg-[#ffc4bf]"
+              className="w-10 h-10 rounded bg-[#06B6D4] text-[#061826] flex items-center justify-center hover:bg-[#22D3EE] hover:scale-105 transition-all font-bold shadow-sm"
               title="Reload telemetry"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
             <button
               onClick={signOut}
-              className="w-10 h-10 rounded bg-[#122131] text-slate-400 flex items-center justify-center hover:text-rose-300"
+              className="w-10 h-10 rounded bg-[#10384A] border border-[#164E63] text-[#94A3B8] flex items-center justify-center hover:text-[#EF4444] hover:border-[#EF4444] transition-all"
               title="Sign out"
             >
               <LogOut className="w-4 h-4" />
@@ -242,38 +248,38 @@ export default function DashboardPage() {
       </header>
 
       <section className="tactical-context flex flex-col gap-2 mb-3">
-        <div className="bg-[#1c2b3c] rounded-md p-2.5 flex items-center justify-between gap-3">
+        <div className="bg-[#0B2638] border border-[#164E63] rounded-md p-2.5 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 min-w-0">
             <VillageIdentityBadge village={selectedVillage} />
             <div className="min-w-0">
-              <span className="telemetry block text-[9px] text-[#ab8986] uppercase tracking-wider">
+              <span className="telemetry block text-[9px] text-[#94A3B8] uppercase tracking-wider">
                 Monitoring Sector
               </span>
-              <div className="flex items-center gap-1 text-sm font-semibold truncate">
+              <div className="flex items-center gap-1 text-sm font-semibold truncate text-[#F8FAFC]">
                 {selectedVillage?.river_basin || 'Upper Alaknanda Basin'}
-                <ChevronDown className="w-4 h-4 text-[#e4beba] shrink-0" />
+                <ChevronDown className="w-4 h-4 text-[#06B6D4] shrink-0" />
               </div>
             </div>
           </div>
-          <div className="telemetry flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#273647] text-[9px] text-[#ffb95f] uppercase tracking-wider shrink-0">
-            <span className="w-2 h-2 rounded-full bg-[#ffb95f] animate-pulse" /> {villages.length} nodes
+          <div className="telemetry flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#071F30] border border-[#164E63] text-[9px] text-[#06B6D4] uppercase tracking-wider shrink-0">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" /> {villages.length} nodes
           </div>
         </div>
-        <div className="bg-[#0d1c2d] rounded-md p-2.5 flex items-center justify-between gap-2">
+        <div className="bg-[#0B2638] border border-[#164E63] rounded-md p-2.5 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-7 h-7 rounded bg-[#ff5451] flex items-center justify-center shrink-0">
-              <Zap className="w-4 h-4 text-[#5c0008]" />
+            <div className="w-7 h-7 rounded bg-[#EF4444] text-[#F8FAFC] flex items-center justify-center shrink-0">
+              <Zap className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <strong className="block text-sm text-[#ffb3ad] uppercase truncate">
+              <strong className="block text-sm text-[#F8FAFC] uppercase truncate">
                 {criticalCount} Sector Red Alert
               </strong>
-              <span className="telemetry text-[9px] text-[#e4beba] truncate">
+              <span className="telemetry text-[9px] text-[#94A3B8] truncate">
                 Live precipitation and surge watch
               </span>
             </div>
           </div>
-          <span className="telemetry px-2 py-1 rounded bg-[#93000a] text-[9px] text-[#ffdad6] uppercase font-bold shrink-0">
+          <span className="telemetry px-2 py-1 rounded bg-[#071F30] border border-[#164E63] text-[9px] text-[#06B6D4] uppercase font-bold shrink-0">
             {criticalCount > 0 ? 'Level 4 Active' : 'Level 1 Watch'}
           </span>
         </div>

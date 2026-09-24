@@ -42,22 +42,22 @@ const HELPLINES = [
 
 const LEVEL_SKIN = {
   red: {
-    card: 'border-rose-500/60 bg-gradient-to-b from-rose-600/25 to-rose-950/10',
-    text: 'text-rose-200',
-    bar: 'bg-rose-500',
-    chip: 'bg-rose-500 text-white',
+    card: 'border-[#EF4444]/60 bg-gradient-to-b from-[#EF4444]/25 to-[#0B2638]',
+    text: 'text-[#EF4444]',
+    bar: 'bg-[#EF4444]',
+    chip: 'bg-[#EF4444] text-[#F8FAFC]',
   },
   yellow: {
-    card: 'border-amber-400/60 bg-gradient-to-b from-amber-500/20 to-amber-950/10',
-    text: 'text-amber-200',
-    bar: 'bg-amber-400',
-    chip: 'bg-amber-400 text-[#3d2600]',
+    card: 'border-[#FBBF24]/60 bg-gradient-to-b from-[#FBBF24]/20 to-[#0B2638]',
+    text: 'text-[#FBBF24]',
+    bar: 'bg-[#FBBF24]',
+    chip: 'bg-[#FBBF24] text-[#061826]',
   },
   green: {
-    card: 'border-emerald-500/50 bg-gradient-to-b from-emerald-600/15 to-emerald-950/10',
-    text: 'text-emerald-200',
-    bar: 'bg-emerald-400',
-    chip: 'bg-emerald-400 text-[#04281a]',
+    card: 'border-[#164E63] bg-gradient-to-b from-[#10B981]/20 to-[#0B2638]',
+    text: 'text-[#10B981]',
+    bar: 'bg-[#10B981]',
+    chip: 'bg-[#10B981] text-[#061826]',
   },
 };
 
@@ -133,27 +133,27 @@ function humanWindow(lang, hours) {
 function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back }) {
   const s = t(lang);
   return (
-    <header className="sticky top-0 z-20 border-b border-[#273647] bg-[#061625]/95 backdrop-blur">
+    <header className="sticky top-0 z-20 rgb-top-beam border-b border-[#164E63] bg-[#071F30]/95 backdrop-blur shadow-[0_4px_25px_rgba(0,0,0,0.4)]">
       <div className="max-w-md mx-auto px-3 py-2.5 flex items-center gap-2">
         {back ? (
           <Link
             to="/citizen"
             aria-label={s.back}
-            className="w-9 h-9 rounded-lg border border-[#273647] bg-[#071a2c] flex items-center justify-center shrink-0 active:scale-95 transition"
+            className="w-9 h-9 rounded-lg border border-[#164E63] bg-[#10384A] flex items-center justify-center shrink-0 active:scale-95 transition"
           >
-            <ArrowLeft className="w-4 h-4 text-slate-300" />
+            <ArrowLeft className="w-4 h-4 text-[#F8FAFC]" />
           </Link>
         ) : (
-          <div className="w-9 h-9 rounded-lg bg-[#122131] border border-[#273647] flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-[#10384A] border border-[#164E63] flex items-center justify-center shrink-0">
             <img src="/varun-vi-logo.png" alt="VARUN logo" className="w-full h-full rounded-lg object-contain p-1" />
           </div>
         )}
 
         <div className="min-w-0 flex-1">
-          <span className="block text-[15px] font-black font-heading tracking-tight text-white leading-none">
+          <span className="block text-[15px] font-black font-heading tracking-tight text-[#F8FAFC] leading-none">
             {s.appName}
           </span>
-          <span className="block text-[10px] text-slate-500 leading-tight mt-0.5 truncate">
+          <span className="block text-[10px] text-[#94A3B8] leading-tight mt-0.5 truncate">
             {s.tagline}
           </span>
         </div>
@@ -162,16 +162,16 @@ function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back 
           <button
             onClick={install}
             aria-label={s.installApp}
-            className="w-9 h-9 rounded-lg border border-cyan-500/40 bg-cyan-500/10 flex items-center justify-center shrink-0 active:scale-95 transition"
+            className="w-9 h-9 rounded-lg border border-[#164E63] bg-[#10384A] flex items-center justify-center shrink-0 active:scale-95 transition"
             title={s.installApp}
           >
-            <Download className="w-4 h-4 text-cyan-300" />
+            <Download className="w-4 h-4 text-[#06B6D4]" />
           </button>
         )}
 
         <Link
           to="/login"
-          className="citizen-header-login inline-flex h-9 items-center gap-1.5 rounded-lg border px-2.5 text-[10px] font-semibold shrink-0"
+          className="citizen-header-login inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#164E63] bg-[#10384A] text-[#F8FAFC] px-2.5 text-[10px] font-semibold shrink-0 hover:border-[#06B6D4] hover:text-[#22D3EE] transition"
         >
           <LogIn className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">
@@ -181,11 +181,11 @@ function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back 
         </Link>
 
         {/* Language is a single tap, always visible, never buried in a menu. */}
-        <div className="flex rounded-lg border border-[#273647] overflow-hidden shrink-0">
+        <div className="flex rounded-lg border border-[#164E63] overflow-hidden shrink-0">
           <button
             onClick={() => setLang('hi')}
             className={`px-2.5 h-9 text-[12px] font-bold transition ${
-              lang === 'hi' ? 'bg-[#ffb3ad] text-[#68000a]' : 'bg-[#071a2c] text-slate-400'
+              lang === 'hi' ? 'bg-[#06B6D4] text-[#061826]' : 'bg-[#10384A] text-[#94A3B8] hover:text-[#F8FAFC]'
             }`}
           >
             हिं
@@ -193,7 +193,7 @@ function TopBar({ lang, setLang, wsConnected, online, canInstall, install, back 
           <button
             onClick={() => setLang('en')}
             className={`px-2.5 h-9 text-[12px] font-bold transition ${
-              lang === 'en' ? 'bg-[#ffb3ad] text-[#68000a]' : 'bg-[#071a2c] text-slate-400'
+              lang === 'en' ? 'bg-[#06B6D4] text-[#061826]' : 'bg-[#10384A] text-[#94A3B8] hover:text-[#F8FAFC]'
             }`}
           >
             EN
@@ -318,8 +318,8 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
               onClick={() => onPick(v.id)}
               className={`citizen-village-row flex items-center gap-3 rounded-lg border p-3 text-left active:scale-[0.99] transition ${
                 v.current_risk_level === 'red'
-                  ? 'border-rose-500/50 bg-rose-500/10'
-                  : 'border-[#273647] bg-[#071a2c]'
+                  ? 'border-[#EF4444]/50 bg-[#EF4444]/10'
+                  : 'border-[#164E63] bg-[#0B2638]'
               }`}
             >
               <span
@@ -328,23 +328,23 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
                 {Math.round(v.current_risk_score || 0)}
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[14px] font-semibold text-white truncate">
+                <span className="block text-[14px] font-semibold text-[#F8FAFC] truncate">
                   {v.name}
                 </span>
-                <span className="block text-[11px] text-slate-500 truncate">
+                <span className="block text-[11px] text-[#94A3B8] truncate">
                   {v.district} · {v.state}
                 </span>
                 <span className={`block text-[11px] font-semibold mt-0.5 ${sk.text}`}>
                   {riskWord(lang, v.current_risk_level)}
                 </span>
               </span>
-              <ChevronRight className="w-4 h-4 text-slate-500 shrink-0" />
+              <ChevronRight className="w-4 h-4 text-[#94A3B8] shrink-0" />
             </button>
           );
         })}
         {!loading && matches.length === 0 && villages.length > 0 && (
           <div className="citizen-picker-state">
-            <span className="text-[12px] text-slate-400">
+            <span className="text-[12px] text-[#94A3B8]">
               {lang === 'hi' ? 'कोई गाँव नहीं मिला।' : 'No village matched.'}
             </span>
           </div>
@@ -357,16 +357,16 @@ function VillagePicker({ lang, villages, loading, loadError, onPick }) {
 
 function SensorTile({ icon: Icon, label, value, unit, note, tone }) {
   return (
-    <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-2.5">
+    <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-2.5">
       <div className="flex items-center gap-1.5 mb-1">
         <Icon className={`w-3.5 h-3.5 shrink-0 ${tone}`} />
-        <span className="text-[10px] text-slate-500 leading-tight">{label}</span>
+        <span className="text-[10px] text-[#94A3B8] leading-tight">{label}</span>
       </div>
-      <span className="text-[16px] font-bold text-white leading-none">
+      <span className="text-[16px] font-bold text-[#F8FAFC] leading-none">
         {value}
-        <small className="text-[10px] text-slate-500 ml-1 font-normal">{unit}</small>
+        <small className="text-[10px] text-[#94A3B8] ml-1 font-normal">{unit}</small>
       </span>
-      {note && <span className="block text-[9px] text-slate-500 mt-1 leading-tight">{note}</span>}
+      {note && <span className="block text-[9px] text-[#94A3B8] mt-1 leading-tight">{note}</span>}
     </div>
   );
 }
@@ -392,16 +392,16 @@ function ShelterCard({ lang, opt, primary, leadTimeHrs }) {
   return (
     <div
       className={`rounded-lg border p-3 ${
-        primary ? 'border-cyan-400/60 bg-cyan-500/10' : 'border-[#273647] bg-[#071a2c]'
+        primary ? 'border-[#06B6D4] bg-[#10384A] shadow-md' : 'border-[#164E63] bg-[#0B2638]'
       }`}
     >
       <div className="flex items-start gap-2 mb-2">
-        <MapPin className={`w-4 h-4 shrink-0 mt-0.5 ${primary ? 'text-cyan-300' : 'text-slate-500'}`} />
+        <MapPin className={`w-4 h-4 shrink-0 mt-0.5 ${primary ? 'text-[#06B6D4]' : 'text-[#94A3B8]'}`} />
         <div className="min-w-0 flex-1">
-          <span className="block text-[14px] font-bold text-white leading-tight">
+          <span className="block text-[14px] font-bold text-[#F8FAFC] leading-tight">
             {opt.shelter_name}
           </span>
-          <span className="block text-[10px] text-slate-500 mt-0.5">
+          <span className="block text-[10px] text-[#94A3B8] mt-0.5">
             {(opt.shelter_type || '').replace(/_/g, ' ')} · {Math.round(opt.elevation_m)} m
           </span>
         </div>
@@ -409,26 +409,26 @@ function ShelterCard({ lang, opt, primary, leadTimeHrs }) {
 
       <div className="grid grid-cols-3 gap-2 mb-2">
         <div>
-          <span className="block text-[9px] text-slate-500 mb-0.5">{s.walkTime}</span>
-          <strong className="text-[15px] text-white">
+          <span className="block text-[9px] text-[#94A3B8] mb-0.5">{s.walkTime}</span>
+          <strong className="text-[15px] text-[#F8FAFC]">
             {Math.round(opt.walking_time_min)}
-            <small className="text-[9px] text-slate-500 ml-0.5 font-normal">{s.minutes}</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5 font-normal">{s.minutes}</small>
           </strong>
         </div>
         <div>
-          <span className="block text-[9px] text-slate-500 mb-0.5">{s.climb}</span>
-          <strong className={`text-[15px] ${below ? 'text-rose-300' : 'text-white'}`}>
+          <span className="block text-[9px] text-[#94A3B8] mb-0.5">{s.climb}</span>
+          <strong className={`text-[15px] ${below ? 'text-rose-400' : 'text-[#F8FAFC]'}`}>
             {Math.abs(gain)}
-            <small className="text-[9px] text-slate-500 ml-0.5 font-normal">
+            <small className="text-[9px] text-[#94A3B8] ml-0.5 font-normal">
               m{below ? ` ${s.downhill}` : ''}
             </small>
           </strong>
         </div>
         <div>
-          <span className="block text-[9px] text-slate-500 mb-0.5">{s.capacity}</span>
-          <strong className="text-[15px] text-white">
+          <span className="block text-[9px] text-[#94A3B8] mb-0.5">{s.capacity}</span>
+          <strong className="text-[15px] text-[#F8FAFC]">
             {opt.capacity}
-            <small className="text-[9px] text-slate-500 ml-0.5 font-normal">{s.people}</small>
+            <small className="text-[9px] text-[#94A3B8] ml-0.5 font-normal">{s.people}</small>
           </strong>
         </div>
       </div>
@@ -442,7 +442,7 @@ function ShelterCard({ lang, opt, primary, leadTimeHrs }) {
           )}
           <span className="text-[12px] font-semibold leading-tight">{verdict}</span>
           {margin != null && (
-            <span className="text-[10px] text-slate-500 ml-auto shrink-0">
+            <span className="text-[10px] text-[#94A3B8] ml-auto shrink-0">
               {Math.abs(margin)} {margin >= 0 ? s.minSpare : s.minShort}
             </span>
           )}
@@ -465,23 +465,23 @@ function ShelterCard({ lang, opt, primary, leadTimeHrs }) {
         {opt.contact_phone && (
           <a
             href={`tel:${opt.contact_phone}`}
-            className="flex-1 h-10 rounded-lg bg-[#0d2b3f] border border-cyan-500/40 flex items-center justify-center gap-1.5 active:scale-95 transition"
+            className="flex-1 h-10 rounded-lg bg-[#10384A] border border-[#164E63] flex items-center justify-center gap-1.5 active:scale-95 transition hover:bg-[#164E63]"
           >
-            <Phone className="w-3.5 h-3.5 text-cyan-300" />
-            <span className="text-[12px] font-semibold text-cyan-200">{opt.contact_phone}</span>
+            <Phone className="w-3.5 h-3.5 text-[#06B6D4]" />
+            <span className="text-[12px] font-semibold text-[#F8FAFC]">{opt.contact_phone}</span>
           </a>
         )}
         <a
           href={`https://www.google.com/maps/dir/?api=1&destination=${opt.latitude},${opt.longitude}&travelmode=walking`}
           target="_blank"
           rel="noreferrer"
-          className="flex-1 h-10 rounded-lg bg-[#071a2c] border border-[#273647] flex items-center justify-center gap-1.5 active:scale-95 transition"
+          className="flex-1 h-10 rounded-lg bg-[#06B6D4] text-[#061826] font-bold flex items-center justify-center gap-1.5 active:scale-95 transition hover:bg-[#22D3EE]"
         >
-          <Footprints className="w-3.5 h-3.5 text-slate-300" />
-          <span className="text-[12px] font-semibold text-slate-200">
+          <Footprints className="w-3.5 h-3.5 text-[#061826]" />
+          <span className="text-[12px] font-bold text-[#061826]">
             {lang === 'hi' ? 'रास्ता देखें' : 'Show route'}
           </span>
-          <ArrowUpRight className="w-3 h-3 text-slate-500" />
+          <ArrowUpRight className="w-3 h-3 text-[#061826]" />
         </a>
       </div>
     </div>
@@ -588,7 +588,7 @@ export default function CitizenPage() {
   // ---- Village picker ----
   if (!villageId) {
     return (
-      <div className="min-h-screen bg-[#04101d] text-slate-100">
+      <div className="min-h-screen bg-[#061826] text-[#F8FAFC]">
         {bar}
         <VillagePicker
           lang={lang}
@@ -604,22 +604,22 @@ export default function CitizenPage() {
   // ---- Village not resolved yet (or not found) ----
   if (!village) {
     return (
-      <div className="min-h-screen bg-[#04101d] text-slate-100">
+      <div className="min-h-screen bg-[#061826] text-[#F8FAFC]">
         {bar}
         <div className="max-w-md mx-auto px-3 py-10 text-center">
           {loading || online ? (
-            <span className="text-[13px] text-slate-400">
+            <span className="text-[13px] text-[#94A3B8]">
               {lang === 'hi' ? 'गाँव की जानकारी आ रही है…' : 'Loading your village…'}
             </span>
           ) : (
-            <span className="text-[13px] text-amber-200">{s.offline}</span>
+            <span className="text-[13px] text-[#FBBF24]">{s.offline}</span>
           )}
           <Link
             to="/citizen"
             onClick={() => {
               autoOpened = true;
             }}
-            className="block mt-4 text-[12px] text-cyan-300"
+            className="block mt-4 text-[12px] text-[#06B6D4] hover:text-[#22D3EE]"
           >
             {s.chooseVillage}
           </Link>
@@ -635,18 +635,18 @@ export default function CitizenPage() {
   const others = (plan?.options || []).filter((o) => o.shelter_id !== rec?.shelter_id).slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-[#04101d] text-slate-100 pb-8">
+    <div className="min-h-screen bg-[#061826] text-[#F8FAFC] pb-8">
       {bar}
 
       <div className="max-w-md mx-auto px-3 py-3 flex flex-col gap-3">
         {/* ---- Which village, and a way out of it ---- */}
         <div className="flex items-end justify-between gap-2">
           <div className="min-w-0">
-            <span className="block text-[10px] text-slate-500">{s.myVillage}</span>
-            <h2 className="text-xl font-black font-heading text-white leading-tight truncate">
+            <span className="block text-[10px] text-[#94A3B8]">{s.myVillage}</span>
+            <h2 className="text-xl font-black font-heading text-[#F8FAFC] leading-tight truncate">
               {village.name}
             </h2>
-            <span className="block text-[11px] text-slate-500 truncate">
+            <span className="block text-[11px] text-[#94A3B8] truncate">
               {village.district} · {village.state}
             </span>
           </div>
@@ -655,7 +655,7 @@ export default function CitizenPage() {
             onClick={() => {
               autoOpened = true;
             }}
-            className="shrink-0 h-8 px-3 rounded-lg border border-[#273647] bg-[#071a2c] flex items-center text-[11px] text-slate-300 active:scale-95 transition"
+            className="shrink-0 h-8 px-3 rounded-lg border border-[#164E63] bg-[#10384A] flex items-center text-[11px] text-[#F8FAFC] hover:bg-[#164E63] active:scale-95 transition"
           >
             {s.change}
           </Link>
@@ -663,12 +663,12 @@ export default function CitizenPage() {
 
         {/* ---- The status card. One glance has to be enough. ---- */}
         <div className={`rounded-xl border p-4 ${sk.card}`}>
-          <span className="block text-[11px] text-slate-400 mb-1">{s.riskNow}</span>
+          <span className="block text-[11px] text-[#94A3B8] mb-1">{s.riskNow}</span>
           <div className="flex items-end gap-3 mb-2">
             <span className={`text-4xl font-black font-heading leading-none ${sk.text}`}>
               {Math.round(village.current_risk_score || 0)}
             </span>
-            <span className="text-[11px] text-slate-400 pb-1">{s.outOf}</span>
+            <span className="text-[11px] text-[#94A3B8] pb-1">{s.outOf}</span>
           </div>
 
           <div className="h-2 rounded-full bg-black/40 overflow-hidden mb-3">
@@ -693,8 +693,8 @@ export default function CitizenPage() {
 
           {village.latest_primary_factor && (
             <div className="mt-3 pt-3 border-t border-white/10">
-              <span className="block text-[10px] text-slate-400 mb-0.5">{s.cause}</span>
-              <span className="text-[12px] text-slate-200 leading-snug">
+              <span className="block text-[10px] text-[#94A3B8] mb-0.5">{s.cause}</span>
+              <span className="text-[12px] text-[#F8FAFC] leading-snug">
                 {factorWord(lang, village.latest_primary_factor)}
               </span>
             </div>
@@ -704,15 +704,15 @@ export default function CitizenPage() {
         {/* ---- How long they have. Shown for watch and danger only; a green village has no
                 meaningful countdown and a fake one would train people to ignore it. ---- */}
         {level !== 'green' && (
-          <div className="rounded-xl border border-[#273647] bg-[#071a2c] p-3">
+          <div className="rounded-xl border border-[#164E63] bg-[#0B2638] p-3">
             <div className="flex items-center gap-1.5 mb-1">
-              <Clock className="w-4 h-4 text-amber-300 shrink-0" />
-              <span className="text-[11px] text-slate-400">{s.timeAvailable}</span>
+              <Clock className="w-4 h-4 text-[#FBBF24] shrink-0" />
+              <span className="text-[11px] text-[#94A3B8]">{s.timeAvailable}</span>
             </div>
-            <span className="text-2xl font-black font-heading text-amber-200 leading-none">
+            <span className="text-2xl font-black font-heading text-[#FBBF24] leading-none">
               {humanWindow(lang, village.current_lead_time_hrs)}
             </span>
-            <p className="text-[10px] text-slate-500 mt-2 leading-relaxed">
+            <p className="text-[10px] text-[#94A3B8] mt-2 leading-relaxed">
               {lang === 'hi'
                 ? 'यह अनुमान है, गारंटी नहीं। स्थिति तेज़ी से बदल सकती है — इंतज़ार न करें।'
                 : 'This is an estimate, not a guarantee. Conditions can change faster — do not wait.'}
@@ -721,8 +721,8 @@ export default function CitizenPage() {
         )}
 
         {/* ---- What to do now ---- */}
-        <div className="rounded-xl border border-[#273647] bg-[#071a2c] p-3">
-          <span className="block text-[13px] font-bold text-white mb-2">{s.whatToDo}</span>
+        <div className="rounded-xl border border-[#164E63] bg-[#0B2638] p-3">
+          <span className="block text-[13px] font-bold text-[#F8FAFC] mb-2">{s.whatToDo}</span>
           <ol className="flex flex-col gap-2">
             {steps.map((step, i) => (
               <li key={i} className="flex gap-2.5">
@@ -731,7 +731,7 @@ export default function CitizenPage() {
                 >
                   {i + 1}
                 </span>
-                <span className="text-[13px] text-slate-200 leading-snug">{step}</span>
+                <span className="text-[13px] text-[#F8FAFC] leading-snug">{step}</span>
               </li>
             ))}
           </ol>
@@ -739,26 +739,26 @@ export default function CitizenPage() {
 
         {/* ---- Where to go ---- */}
         <div className="flex flex-col gap-2">
-          <span className="block text-[13px] font-bold text-white">{s.whereToGo}</span>
+          <span className="block text-[13px] font-bold text-[#F8FAFC]">{s.whereToGo}</span>
 
           {planError && !plan && (
-            <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3 flex items-center gap-2">
-              <RefreshCw className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-              <span className="text-[11px] text-slate-400">{planError}</span>
+            <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3 flex items-center gap-2">
+              <RefreshCw className="w-3.5 h-3.5 text-[#94A3B8] shrink-0" />
+              <span className="text-[11px] text-[#94A3B8]">{planError}</span>
             </div>
           )}
 
           {!plan && !planError && (
-            <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
-              <span className="text-[11px] text-slate-500">
+            <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
+              <span className="text-[11px] text-[#94A3B8]">
                 {lang === 'hi' ? 'रास्ते की गणना हो रही है…' : 'Working out your route…'}
               </span>
             </div>
           )}
 
           {plan && !rec && (
-            <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
-              <span className="text-[12px] text-slate-300">{s.noShelter}</span>
+            <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
+              <span className="text-[12px] text-[#F8FAFC]">{s.noShelter}</span>
             </div>
           )}
 
@@ -773,7 +773,7 @@ export default function CitizenPage() {
 
           {others.length > 0 && (
             <>
-              <span className="block text-[11px] text-slate-500 mt-1">{s.otherShelters}</span>
+              <span className="block text-[11px] text-[#94A3B8] mt-1">{s.otherShelters}</span>
               {others.map((o) => (
                 <ShelterCard
                   key={o.shelter_id}
@@ -788,7 +788,7 @@ export default function CitizenPage() {
 
         {/* ---- The measurements behind the number, in plain words ---- */}
         <div>
-          <span className="block text-[11px] text-slate-500 mb-1.5">
+          <span className="block text-[11px] text-[#94A3B8] mb-1.5">
             {lang === 'hi' ? 'आपके गाँव के सेंसर' : 'Sensors in your village'}
           </span>
           <div className="grid grid-cols-3 gap-2">
@@ -835,7 +835,7 @@ export default function CitizenPage() {
               }
             />
           </div>
-          <span className="block text-[10px] text-slate-600 mt-1.5">
+          <span className="block text-[10px] text-[#94A3B8] mt-1.5">
             {s.lastUpdate}:{' '}
             {village.latest_reading_time
               ? new Date(village.latest_reading_time).toLocaleString(
@@ -848,20 +848,20 @@ export default function CitizenPage() {
         </div>
 
         {/* ---- Calling for help must never be more than one tap away ---- */}
-        <div className="rounded-xl border border-[#273647] bg-[#071a2c] p-3">
-          <span className="block text-[13px] font-bold text-white mb-2">{s.callHelp}</span>
+        <div className="rounded-xl border border-[#164E63] bg-[#0B2638] p-3">
+          <span className="block text-[13px] font-bold text-[#F8FAFC] mb-2">{s.callHelp}</span>
           <div className="flex flex-col gap-2">
             {HELPLINES.map((h) => (
               <a
                 key={h.number}
                 href={`tel:${h.number}`}
-                className="flex items-center gap-2.5 h-12 rounded-lg border border-[#273647] bg-[#04101d] px-3 active:scale-[0.99] transition"
+                className="flex items-center gap-2.5 h-12 rounded-lg border border-[#164E63] bg-[#10384A] px-3 hover:bg-[#164E63] active:scale-[0.99] transition"
               >
-                <Phone className="w-4 h-4 text-emerald-300 shrink-0" />
-                <span className="text-[17px] font-black font-heading text-white w-14 shrink-0">
+                <Phone className="w-4 h-4 text-[#06B6D4] shrink-0" />
+                <span className="text-[17px] font-black font-heading text-[#F8FAFC] w-14 shrink-0">
                   {h.number}
                 </span>
-                <span className="text-[11px] text-slate-400 leading-tight">
+                <span className="text-[11px] text-[#94A3B8] leading-tight">
                   {lang === 'hi' ? h.hi : h.en}
                 </span>
               </a>

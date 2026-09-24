@@ -41,7 +41,7 @@ if errorlevel 1 (
 )
 
 echo Starting DRAIN-GUARD AI...
-start "DRAIN-GUARD Backend" /D "%ROOT%" cmd /k ""%PYTHON%" -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
+start "DRAIN-GUARD Backend" /D "%ROOT%" cmd /k ""%PYTHON%" "-m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
 start "DRAIN-GUARD Frontend" /D "%ROOT%frontend" cmd /k "npm run dev -- --open"
 
 echo.

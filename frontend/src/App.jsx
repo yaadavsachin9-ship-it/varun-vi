@@ -36,6 +36,7 @@ import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import CitizenPage from './pages/CitizenPage';
+import DisasterChatbot from './components/DisasterChatbot';
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const VillageDetailPage = lazy(() => import('./pages/VillageDetailPage'));
@@ -44,8 +45,8 @@ const BacktestPage = lazy(() => import('./pages/BacktestPage'));
 /** Shown only for the moment an operator chunk is in flight, on the app's own background. */
 function ChunkFallback() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#04101d]">
-      <p className="telemetry text-[10px] uppercase tracking-[0.18em] text-cyan-300/70">
+    <div className="flex min-h-screen items-center justify-center bg-[#061826]">
+      <p className="telemetry text-[10px] uppercase tracking-[0.18em] text-[#06B6D4]">
         Loading console…
       </p>
     </div>
@@ -54,47 +55,52 @@ function ChunkFallback() {
 
 export default function App() {
   return (
-    <Routes>
-      {/* ---- Public ---- */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/citizen" element={<CitizenPage />} />
-      <Route path="/citizen/:villageId" element={<CitizenPage />} />
+    <>
+      <Routes>
+        {/* ---- Public ---- */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/citizen" element={<CitizenPage />} />
+        <Route path="/citizen/:villageId" element={<CitizenPage />} />
 
-      {/* ---- Operator console ---- */}
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<ChunkFallback />}>
-              <DashboardPage />
-            </Suspense>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/village/:villageId"
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<ChunkFallback />}>
-              <VillageDetailPage />
-            </Suspense>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/backtest"
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<ChunkFallback />}>
-              <BacktestPage />
-            </Suspense>
-          </ProtectedRoute>
-        }
-      />
+        {/* ---- Operator console ---- */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<ChunkFallback />}>
+                <DashboardPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/village/:villageId"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<ChunkFallback />}>
+                <VillageDetailPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/backtest"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<ChunkFallback />}>
+                <BacktestPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
 
-      {/* Anything else lands on the console, which itself bounces to /login when unauthenticated. */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
+        {/* Anything else lands on the console, which itself bounces to /login when unauthenticated. */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+
+      {/* Global Bilingual Voice-Enabled Emergency Chatbot */}
+      <DisasterChatbot />
+    </>
   );
 }

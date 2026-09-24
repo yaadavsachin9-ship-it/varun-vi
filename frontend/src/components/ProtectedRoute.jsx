@@ -20,9 +20,9 @@ export default function ProtectedRoute({ children }) {
   // refresh would flash the login screen for a moment even for a signed-in operator.
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-[#04101d] text-slate-400">
-        <Loader2 className="w-6 h-6 animate-spin text-cyan-300" />
-        <span className="telemetry text-[10px] uppercase tracking-[0.2em]">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-[#061826] text-[#F8FAFC]">
+        <Loader2 className="w-6 h-6 animate-spin text-[#06B6D4]" />
+        <span className="telemetry text-[10px] uppercase tracking-[0.2em] text-[#94A3B8]">
           Restoring operator session
         </span>
       </div>

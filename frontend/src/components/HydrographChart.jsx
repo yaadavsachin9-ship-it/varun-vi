@@ -114,42 +114,44 @@ export default function HydrographChart({
           <ComposedChart data={history} margin={{ top: 6, right: 6, left: -22, bottom: 0 }}>
             <defs>
               <linearGradient id="rainFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#22d3ee" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#22d3ee" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="#06B6D4" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="#06B6D4" stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 4" stroke="#1d2c3f" vertical={false} />
+            <CartesianGrid strokeDasharray="3 4" stroke="#164E63" strokeOpacity={0.4} vertical={false} />
             <XAxis
               dataKey="time"
-              stroke="#5b6b80"
-              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace' }}
+              stroke="#94A3B8"
+              strokeOpacity={0.6}
+              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace', fill: '#94A3B8' }}
               interval="preserveStartEnd"
               minTickGap={40}
             />
             <YAxis
               yAxisId="mm"
-              stroke="#22d3ee"
-              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace' }}
+              stroke="#06B6D4"
+              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace', fill: '#06B6D4' }}
               domain={[0, 'auto']}
               width={34}
             />
             <YAxis
               yAxisId="pct"
               orientation="right"
-              stroke="#f59e0b"
-              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace' }}
+              stroke="#FBBF24"
+              tick={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace', fill: '#FBBF24' }}
               domain={[0, 100]}
               width={26}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#04121f',
-                border: '1px solid #273647',
+                backgroundColor: '#071F30',
+                border: '1px solid #164E63',
                 borderRadius: 4,
                 fontSize: 10,
                 fontFamily: 'JetBrains Mono, monospace',
+                color: '#F8FAFC',
               }}
-              labelStyle={{ color: '#67e8f9' }}
+              labelStyle={{ color: '#06B6D4' }}
               formatter={(value, name) => [typeof value === 'number' ? value.toFixed(2) : value, name]}
             />
 
@@ -157,25 +159,25 @@ export default function HydrographChart({
             <ReferenceLine
               yAxisId="pct"
               y={RED_THRESHOLD}
-              stroke="#ef4444"
+              stroke="#EF4444"
               strokeDasharray="5 3"
               strokeWidth={1}
               label={
                 compact
                   ? undefined
-                  : { value: 'RED 70', position: 'right', fill: '#ef4444', fontSize: 7 }
+                  : { value: 'RED 70', position: 'right', fill: '#EF4444', fontSize: 7 }
               }
             />
             <ReferenceLine
               yAxisId="pct"
               y={SOIL_CO_TRIGGER}
-              stroke="#f59e0b"
+              stroke="#FBBF24"
               strokeDasharray="2 4"
               strokeWidth={1}
               label={
                 compact
                   ? undefined
-                  : { value: 'SOIL 85', position: 'right', fill: '#f59e0b', fontSize: 7 }
+                  : { value: 'SOIL 85', position: 'right', fill: '#FBBF24', fontSize: 7 }
               }
             />
 
@@ -184,7 +186,7 @@ export default function HydrographChart({
               type="monotone"
               dataKey="rainfall_mm"
               name="Rain mm/h"
-              stroke="#22d3ee"
+              stroke="#06B6D4"
               strokeWidth={1.8}
               fill="url(#rainFill)"
               dot={false}

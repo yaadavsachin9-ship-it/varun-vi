@@ -61,40 +61,40 @@ function EventCard({ ev, active, onClick }) {
       onClick={onClick}
       className={`text-left rounded-lg border p-3 transition w-full ${
         active
-          ? 'border-cyan-500/60 bg-cyan-500/10'
-          : 'border-[#273647] bg-[#071a2c] hover:border-[#3a4d63]'
+          ? 'border-[#06B6D4] bg-[#10384A] shadow-sm'
+          : 'border-[#164E63] bg-[#0B2638] hover:border-[#06B6D4]'
       }`}
     >
       <div className="flex items-start justify-between gap-2 mb-1.5">
-        <span className="text-[13px] font-bold text-white leading-tight">{ev.name}</span>
+        <span className="text-[13px] font-bold text-[#F8FAFC] leading-tight">{ev.name}</span>
         <DriverIcon
           driver={ev.driver}
-          className={`w-4 h-4 shrink-0 ${active ? 'text-cyan-300' : 'text-slate-500'}`}
+          className={`w-4 h-4 shrink-0 ${active ? 'text-[#06B6D4]' : 'text-[#94A3B8]'}`}
         />
       </div>
-      <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-500 mb-2">
+      <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-2">
         {ev.event_date} · {ev.region}
       </span>
-      <p className="text-[10px] text-slate-400 leading-relaxed mb-2">{ev.driver_label}</p>
+      <p className="text-[10px] text-[#94A3B8] leading-relaxed mb-2">{ev.driver_label}</p>
       <div className="flex items-center justify-between text-[9px] telemetry uppercase tracking-wider">
-        <span className="text-rose-300/80">{ev.human_cost}</span>
-        <span className="text-slate-500">{ev.timeline_points} steps</span>
+        <span className="text-rose-400 font-bold">{ev.human_cost}</span>
+        <span className="text-[#94A3B8]">{ev.timeline_points} steps</span>
       </div>
     </button>
   );
 }
 
-function WarningStat({ icon: Icon, label, value, sub, tone = 'text-white' }) {
+function WarningStat({ icon: Icon, label, value, sub, tone = 'text-[#F8FAFC]' }) {
   return (
-    <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
+    <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
       <div className="flex items-center gap-1.5 mb-1.5">
-        <Icon className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-        <span className="telemetry text-[9px] uppercase tracking-wider text-slate-400">
+        <Icon className="w-3.5 h-3.5 text-[#06B6D4] shrink-0" />
+        <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8]">
           {label}
         </span>
       </div>
       <span className={`block text-xl font-black font-heading leading-none ${tone}`}>{value}</span>
-      {sub && <span className="block text-[10px] text-slate-500 mt-1.5 leading-relaxed">{sub}</span>}
+      {sub && <span className="block text-[10px] text-[#94A3B8] mt-1.5 leading-relaxed">{sub}</span>}
     </div>
   );
 }
@@ -104,10 +104,10 @@ function WarningStat({ icon: Icon, label, value, sub, tone = 'text-white' }) {
  *  summarised away. */
 function StepsTable({ steps, quietBaseline }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-[#273647]">
+    <div className="overflow-x-auto rounded-lg border border-[#164E63]">
       <table className="w-full text-left border-collapse min-w-[860px]">
         <thead>
-          <tr className="bg-[#0a1e30] telemetry text-[9px] uppercase tracking-wider text-slate-400">
+          <tr className="bg-[#071F30] telemetry text-[9px] uppercase tracking-wider text-[#94A3B8] border-b border-[#164E63]">
             <th className="px-2.5 py-2 font-semibold">Clock</th>
             <th className="px-2.5 py-2 font-semibold text-right">Rain 1h</th>
             <th className="px-2.5 py-2 font-semibold text-right">Rain 24h</th>
@@ -116,7 +116,7 @@ function StepsTable({ steps, quietBaseline }) {
             <th className="px-2.5 py-2 font-semibold text-right">I/D ratio</th>
             <th className="px-2.5 py-2 font-semibold text-right">ML susc.</th>
             <th className="px-2.5 py-2 font-semibold text-right">Fused</th>
-            <th className="px-2.5 py-2 font-semibold text-right border-l border-[#273647]">
+            <th className="px-2.5 py-2 font-semibold text-right border-l border-[#164E63]">
               Met-only
             </th>
             <th className="px-2.5 py-2 font-semibold">Lead</th>
@@ -129,34 +129,34 @@ function StepsTable({ steps, quietBaseline }) {
             return (
               <tr
                 key={s.t_minus_hrs}
-                className={`border-t border-[#182a3c] ${
-                  isFirstRed ? 'bg-rose-500/10' : i % 2 ? 'bg-[#061625]' : ''
+                className={`border-t border-[#164E63]/40 ${
+                  isFirstRed ? 'bg-rose-500/10' : i % 2 ? 'bg-[#071F30]/40' : 'bg-[#0B2638]/40'
                 }`}
               >
                 <td className="px-2.5 py-1.5 whitespace-nowrap">
-                  <span className="text-slate-200 font-semibold">{s.clock_label}</span>
+                  <span className="text-[#F8FAFC] font-semibold">{s.clock_label}</span>
                   {isFirstRed && (
-                    <span className="ml-1.5 text-[8px] uppercase text-rose-300 font-bold">
+                    <span className="ml-1.5 text-[8px] uppercase text-rose-400 font-bold">
                       ← first red
                     </span>
                   )}
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-cyan-300">
+                <td className="px-2.5 py-1.5 text-right text-[#06B6D4]">
                   {s.inputs.rainfall_1h_mm.toFixed(1)}
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-cyan-300/70">
+                <td className="px-2.5 py-1.5 text-right text-[#06B6D4]/70">
                   {s.inputs.rainfall_24h_mm.toFixed(0)}
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-emerald-300">
+                <td className="px-2.5 py-1.5 text-right text-emerald-400">
                   {s.inputs.soil_moisture_pct.toFixed(1)}%
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-fuchsia-300">
+                <td className="px-2.5 py-1.5 text-right text-cyan-300">
                   {s.inputs.vibration_index.toFixed(3)}
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-slate-400">
+                <td className="px-2.5 py-1.5 text-right text-[#94A3B8]">
                   {s.intensity_duration_ratio.toFixed(2)}
                 </td>
-                <td className="px-2.5 py-1.5 text-right text-slate-400">
+                <td className="px-2.5 py-1.5 text-right text-[#94A3B8]">
                   {s.ml_susceptibility.toFixed(0)}%
                 </td>
                 <td className="px-2.5 py-1.5 text-right">
@@ -167,7 +167,7 @@ function StepsTable({ steps, quietBaseline }) {
                     </span>
                   </span>
                 </td>
-                <td className="px-2.5 py-1.5 text-right border-l border-[#273647]">
+                <td className="px-2.5 py-1.5 text-right border-l border-[#164E63]">
                   <span className="inline-flex items-center gap-1.5 justify-end">
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${LEVEL_DOT[s.met_only_risk_level]}`}
@@ -181,7 +181,7 @@ function StepsTable({ steps, quietBaseline }) {
                   {s.estimated_lead_time_hrs.toFixed(1)} h
                 </td>
                 <td className="px-2.5 py-1.5">
-                  <span className="text-slate-300">{s.primary_factor}</span>
+                  <span className="text-[#F8FAFC]">{s.primary_factor}</span>
                   {s.red_trigger_rules?.length > 0 && (
                     <span className="block text-[8px] uppercase tracking-wider text-rose-300/70 mt-0.5">
                       {s.red_trigger_rules.map((r) => RULE_LABEL[r] || r).join(' · ')}
@@ -193,10 +193,10 @@ function StepsTable({ steps, quietBaseline }) {
           })}
         </tbody>
       </table>
-      <div className="bg-[#0a1e30] px-2.5 py-2 border-t border-[#273647]">
-        <p className="text-[10px] text-slate-500 leading-relaxed">
-          <span className="text-slate-300 font-semibold">Met-only column:</span> the identical step
-          re-scored with <code className="text-fuchsia-300">vibration_index</code> clamped to a
+      <div className="bg-[#071F30] px-2.5 py-2 border-t border-[#164E63]">
+        <p className="text-[10px] text-[#94A3B8] leading-relaxed">
+          <span className="text-[#F8FAFC] font-semibold">Met-only column:</span> the identical step
+          re-scored with <code className="text-cyan-300">vibration_index</code> clamped to a
           quiet baseline of {quietBaseline}. It answers one question — would the rainfall and
           soil-moisture channels alone have raised this alarm?
         </p>
@@ -259,24 +259,24 @@ export default function BacktestPage() {
   const metBlind = sum && sum.seismic_channel_essential;
 
   return (
-    <div className="min-h-screen bg-[#04101d] text-slate-100">
+    <div className="min-h-screen bg-[#061826] text-[#F8FAFC]">
       {/* ---- Header ---- */}
-      <header className="border-b border-[#273647] bg-[#061625]/90 backdrop-blur sticky top-0 z-20">
+      <header className="border-b border-[#164E63] bg-[#071F30]/95 backdrop-blur sticky top-0 z-20">
         <div className="max-w-[1500px] mx-auto px-4 py-2.5 flex items-center gap-3">
           <Link
             to="/dashboard"
-            className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white transition shrink-0"
+            className="flex items-center gap-1.5 text-[11px] text-[#94A3B8] hover:text-[#F8FAFC] transition shrink-0"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="telemetry uppercase tracking-wider text-[9px]">Console</span>
           </Link>
-          <div className="w-px h-6 bg-[#273647]" />
-          <History className="w-4 h-4 text-[#ffb3ad] shrink-0" />
+          <div className="w-px h-6 bg-[#164E63]" />
+          <History className="w-4 h-4 text-[#06B6D4] shrink-0" />
           <div className="min-w-0">
-            <h1 className="text-sm font-black font-heading tracking-tight text-white leading-none">
+            <h1 className="text-sm font-black font-heading tracking-tight text-[#F8FAFC] leading-none">
               HISTORICAL EVENT BACKTEST
             </h1>
-            <span className="telemetry text-[9px] uppercase tracking-[0.15em] text-slate-500">
+            <span className="telemetry text-[9px] uppercase tracking-[0.15em] text-[#94A3B8]">
               Would this system have warned in time?
             </span>
           </div>
@@ -315,7 +315,7 @@ export default function BacktestPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4">
           {/* ---- Event catalogue ---- */}
           <aside className="flex flex-col gap-2">
-            <span className="telemetry text-[9px] uppercase tracking-wider text-slate-500 px-1">
+            <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8] px-1">
               Replay catalogue
             </span>
             {catalogueError && (
@@ -333,7 +333,7 @@ export default function BacktestPage() {
                 onClick={() => setSelectedId(e.id)}
               />
             ))}
-            <p className="text-[10px] text-slate-500 leading-relaxed px-1 mt-1">
+            <p className="text-[10px] text-[#94A3B8] leading-relaxed px-1 mt-1">
               Chamoli 2021 is in this list on purpose. It was a rock–ice avalanche on a dry
               winter day, so the rainfall pathway cannot see it at all — the met-only column is
               there to prove that rather than let the claim stand unmeasured.
@@ -343,9 +343,9 @@ export default function BacktestPage() {
           {/* ---- Replay result ---- */}
           <section className="min-w-0">
             {loading && (
-              <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-10 flex flex-col items-center gap-2">
-                <Loader2 className="w-5 h-5 text-cyan-300 animate-spin" />
-                <span className="telemetry text-[10px] uppercase tracking-wider text-slate-400">
+              <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-10 flex flex-col items-center gap-2">
+                <Loader2 className="w-5 h-5 text-[#06B6D4] animate-spin" />
+                <span className="telemetry text-[10px] uppercase tracking-wider text-[#94A3B8]">
                   Re-running the engine over the reconstructed timeline…
                 </span>
               </div>
@@ -380,7 +380,7 @@ export default function BacktestPage() {
                       <XCircle className="w-5 h-5 text-rose-300 shrink-0 mt-0.5" />
                     )}
                     <div className="min-w-0">
-                      <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-1">
+                      <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-1">
                         {ev.name} · {ev.event_date} · {ev.region}
                       </span>
                       <h2
@@ -390,14 +390,14 @@ export default function BacktestPage() {
                       >
                         {sum.verdict.headline}
                       </h2>
-                      <p className="text-[12px] text-slate-200 leading-relaxed mb-2">
+                      <p className="text-[12px] text-[#F8FAFC] leading-relaxed mb-2">
                         {sum.verdict.detail}
                       </p>
-                      <div className="rounded border border-[#273647] bg-[#04101d]/60 p-2.5">
-                        <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-500 mb-1">
+                      <div className="rounded border border-[#164E63] bg-[#10384A] p-2.5">
+                        <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-1">
                           Limitation
                         </span>
-                        <p className="text-[11px] text-slate-400 leading-relaxed">
+                        <p className="text-[11px] text-[#94A3B8] leading-relaxed">
                           {sum.verdict.limitation}
                         </p>
                       </div>
@@ -411,21 +411,21 @@ export default function BacktestPage() {
                     icon={ShieldAlert}
                     label="Red warning ahead"
                     value={sum.red_warning_label || '—'}
-                    tone={sum.red_warning_hrs ? 'text-rose-300' : 'text-slate-500'}
+                    tone={sum.red_warning_hrs ? 'text-rose-300' : 'text-[#94A3B8]'}
                     sub="Time between the first RED evaluation and the destructive surge."
                   />
                   <WarningStat
                     icon={TriangleAlert}
                     label="Yellow watch ahead"
                     value={sum.yellow_warning_label || '—'}
-                    tone={sum.yellow_warning_hrs ? 'text-amber-300' : 'text-slate-500'}
+                    tone={sum.yellow_warning_hrs ? 'text-amber-300' : 'text-[#94A3B8]'}
                     sub="First moment the console would have raised a watch."
                   />
                   <WarningStat
                     icon={CloudRain}
                     label="Met-only red warning"
                     value={sum.met_only_red_warning_label || 'never'}
-                    tone={sum.met_only_red_warning_hrs ? 'text-cyan-300' : 'text-rose-300'}
+                    tone={sum.met_only_red_warning_hrs ? 'text-[#06B6D4]' : 'text-rose-300'}
                     sub={
                       metBlind
                         ? 'Rainfall + soil alone: no red. The seismic channel is what catches this event.'
@@ -436,7 +436,7 @@ export default function BacktestPage() {
                     icon={Activity}
                     label="Peak fused score"
                     value={sum.peak_risk_score.toFixed(1)}
-                    tone="text-white"
+                    tone="text-[#F8FAFC]"
                     sub={
                       sum.red_trigger_rules?.length
                         ? `Triggered by: ${sum.red_trigger_rules
@@ -448,24 +448,24 @@ export default function BacktestPage() {
                 </div>
 
                 {/* ---- Two clocks. These get confused constantly, so they are named. ---- */}
-                <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
+                <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
                   <div className="flex items-start gap-2">
-                    <Clock className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <Clock className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5" />
                     <div className="min-w-0">
-                      <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-1.5">
+                      <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-1.5">
                         Two different clocks
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-2">
-                        <div className="rounded border border-[#182a3c] bg-[#04101d] px-2.5 py-2">
-                          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+                        <div className="rounded border border-[#164E63] bg-[#10384A] px-2.5 py-2">
+                          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
                             Warning ahead of surge
                           </span>
                           <span className="text-sm font-bold text-rose-300">
                             {sum.red_warning_label || '—'}
                           </span>
                         </div>
-                        <div className="rounded border border-[#182a3c] bg-[#04101d] px-2.5 py-2">
-                          <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+                        <div className="rounded border border-[#164E63] bg-[#10384A] px-2.5 py-2">
+                          <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
                             Engine saturation window at first red
                           </span>
                           <span className="text-sm font-bold text-amber-300">
@@ -475,7 +475,7 @@ export default function BacktestPage() {
                           </span>
                         </div>
                       </div>
-                      <p className="text-[10px] text-slate-500 leading-relaxed">{sum.clock_note}</p>
+                      <p className="text-[10px] text-[#94A3B8] leading-relaxed">{sum.clock_note}</p>
                     </div>
                   </div>
                 </div>
@@ -484,26 +484,26 @@ export default function BacktestPage() {
                 <div
                   className={`rounded-lg border p-3 ${
                     metBlind
-                      ? 'border-fuchsia-500/40 bg-fuchsia-500/10'
-                      : 'border-[#273647] bg-[#071a2c]'
+                      ? 'border-cyan-500/40 bg-cyan-500/10'
+                      : 'border-[#164E63] bg-[#0B2638]'
                   }`}
                 >
                   <div className="flex items-start gap-2">
                     <Radio
                       className={`w-4 h-4 shrink-0 mt-0.5 ${
-                        metBlind ? 'text-fuchsia-300' : 'text-slate-500'
+                        metBlind ? 'text-cyan-300' : 'text-[#06B6D4]'
                       }`}
                     />
                     <div className="min-w-0">
-                      <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-1">
+                      <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-1">
                         Seismic channel ablation
                       </span>
-                      <p className="text-[11px] text-slate-200 leading-relaxed">
+                      <p className="text-[11px] text-[#F8FAFC] leading-relaxed">
                         {metBlind ? (
                           <>
                             With the vibration input clamped to a quiet baseline of{' '}
                             {result.quiet_vibration_baseline}, this event{' '}
-                            <span className="font-bold text-fuchsia-200">never reaches red</span>.
+                            <span className="font-bold text-cyan-200">never reaches red</span>.
                             The seismic channel is not a bonus feature for this hazard class — it
                             is the only channel that sees it. A rainfall-threshold system would
                             have issued nothing.
@@ -512,7 +512,7 @@ export default function BacktestPage() {
                           <>
                             With the vibration input clamped to a quiet baseline of{' '}
                             {result.quiet_vibration_baseline}, this event still reaches red at{' '}
-                            <span className="font-bold text-cyan-200">
+                            <span className="font-bold text-[#06B6D4]">
                               {sum.met_only_red_warning_label}
                             </span>
                             . This was a rainfall-driven event, so the meteorological pathway
@@ -527,16 +527,16 @@ export default function BacktestPage() {
 
                 {/* ---- What actually happened, and where the inputs came from ---- */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                  <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
-                    <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-1.5">
+                  <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
+                    <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-1.5">
                       The event
                     </span>
-                    <p className="text-[11px] text-slate-300 leading-relaxed mb-2">
+                    <p className="text-[11px] text-[#F8FAFC] leading-relaxed mb-2">
                       {ev.impact_summary}
                     </p>
                     <div className="flex items-center gap-1.5 mb-2">
-                      <DriverIcon driver={ev.driver} className="w-3.5 h-3.5 text-slate-500" />
-                      <span className="text-[10px] text-slate-400">{ev.driver_label}</span>
+                      <DriverIcon driver={ev.driver} className="w-3.5 h-3.5 text-[#06B6D4]" />
+                      <span className="text-[10px] text-[#94A3B8]">{ev.driver_label}</span>
                     </div>
                     <div className="rounded border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5">
                       <span className="telemetry text-[8px] uppercase tracking-wider text-rose-200/70">
@@ -548,20 +548,20 @@ export default function BacktestPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
+                  <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
                     <div className="flex items-center gap-1.5 mb-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-slate-500" />
-                      <span className="telemetry text-[9px] uppercase tracking-wider text-slate-400">
+                      <BookOpen className="w-3.5 h-3.5 text-[#06B6D4]" />
+                      <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8]">
                         Where the input curve comes from
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-300 leading-relaxed mb-2">
+                    <p className="text-[11px] text-[#F8FAFC] leading-relaxed mb-2">
                       {ev.published_basis}
                     </p>
                     <ul className="flex flex-col gap-1">
                       {ev.references?.map((r, i) => (
-                        <li key={i} className="text-[10px] text-slate-500 leading-relaxed flex gap-1.5">
-                          <span className="text-slate-600 shrink-0">[{i + 1}]</span>
+                        <li key={i} className="text-[10px] text-[#94A3B8] leading-relaxed flex gap-1.5">
+                          <span className="text-[#06B6D4] shrink-0">[{i + 1}]</span>
                           <span>{r}</span>
                         </li>
                       ))}
@@ -570,8 +570,8 @@ export default function BacktestPage() {
                 </div>
 
                 {/* ---- Site parameters actually fed to the engine ---- */}
-                <div className="rounded-lg border border-[#273647] bg-[#071a2c] p-3">
-                  <span className="telemetry block text-[9px] uppercase tracking-wider text-slate-400 mb-2">
+                <div className="rounded-lg border border-[#164E63] bg-[#0B2638] p-3">
+                  <span className="telemetry block text-[9px] uppercase tracking-wider text-[#94A3B8] mb-2">
                     Static site inputs · {ev.site.name}
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
@@ -584,16 +584,16 @@ export default function BacktestPage() {
                     ].map(([k, v]) => (
                       <div
                         key={k}
-                        className="rounded border border-[#182a3c] bg-[#04101d] px-2.5 py-1.5"
+                        className="rounded border border-[#164E63] bg-[#10384A] px-2.5 py-1.5"
                       >
-                        <span className="telemetry block text-[8px] uppercase tracking-wider text-slate-500">
+                        <span className="telemetry block text-[8px] uppercase tracking-wider text-[#94A3B8]">
                           {k}
                         </span>
-                        <span className="telemetry text-[12px] font-bold text-slate-200">{v}</span>
+                        <span className="telemetry text-[12px] font-bold text-[#F8FAFC]">{v}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-[10px] text-slate-500 leading-relaxed mt-2">
+                  <p className="text-[10px] text-[#94A3B8] leading-relaxed mt-2">
                     Terrain values are taken from the same 30 m SRTM-derived parameters the live
                     nodes use, so the replay and the console are scoring on identical geometry.
                   </p>
@@ -602,8 +602,8 @@ export default function BacktestPage() {
                 {/* ---- The auditable timeline ---- */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-2">
-                    <Layers className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="telemetry text-[9px] uppercase tracking-wider text-slate-400">
+                    <Layers className="w-3.5 h-3.5 text-[#94A3B8]" />
+                    <span className="telemetry text-[9px] uppercase tracking-wider text-[#94A3B8]">
                       Step-by-step replay · {result.steps.length} evaluations
                     </span>
                   </div>
